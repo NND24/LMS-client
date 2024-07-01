@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ["class"],
   theme: {
     extend: {
       fontFamily: {
@@ -16,10 +17,10 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      screen: {
+      screens: {
         "1000px": "1000px",
         "1100px": "1100px",
-        "12000px": "1200px",
+        "1200px": "1200px",
         "1300px": "1300px",
         "1500px": "1500px",
         "800px": "800px",
@@ -29,4 +30,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
