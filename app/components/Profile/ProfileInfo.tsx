@@ -3,8 +3,9 @@ import React, { FC, useState, useEffect } from "react";
 import defaultAvatar from "../../../public/assets/avatar.png";
 import { AiOutlineCamera } from "react-icons/ai";
 import { styles } from "@/app/styles/style";
-import { useUpdateAvatarMutation } from "@/redux/features/user/userApi";
+import { useEditProfileMutation, useUpdateAvatarMutation } from "@/redux/features/user/userApi";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
+import toast from "react-hot-toast";
 
 type Props = {
   avatar: string | null;
@@ -14,6 +15,7 @@ type Props = {
 const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   const [name, setName] = useState(user && user.name);
   const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation();
+  const [editProfile, { isSuccess: updateSuccess, error: updateError }] = useEditProfileMutation();
   const [loadUser, setLoadUser] = useState(false);
   const {} = useLoadUserQuery(undefined, { skip: loadUser ? false : true });
 
@@ -23,9 +25,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
     fileReader.onload = () => {
       if (fileReader.readyState === 2) {
         const avatar = fileReader.result;
-        updateAvatar({
-          avatar,
-        });
+        updateAvatar(avatar);
       }
     };
     fileReader.readAsDataURL(e.target.files[0]);
@@ -33,14 +33,26 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
 
   useEffect(() => {
     if (isSuccess) {
+      toast.success("Avatar update successfully");
       setLoadUser(true);
     }
-    if (error) {
+    if (error || updateError) {
       console.log(error);
     }
-  }, [isSuccess, error]);
+    if (updateSuccess) {
+      toast.success("Profile update successfully");
+      setLoadUser(true);
+    }
+  }, [isSuccess, error, updateSuccess, updateError]);
 
-  const handleSubmit = async (e: any) => {};
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (name != "") {
+      await editProfile({
+        name,
+      });
+    }
+  };
 
   return (
     <>

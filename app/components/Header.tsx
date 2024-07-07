@@ -37,21 +37,24 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
 
   useEffect(() => {
     if (!user && data) {
-      const email = data?.user?.email ?? "";
-      const name = data?.user?.name ?? "";
-      const avatar = data?.user?.image ?? "";
+      if (data) {
+        const email = data?.user?.email ?? "";
+        const name = data?.user?.name ?? "";
+        const avatar = data?.user?.image ?? "";
 
-      socialAuth({
-        email,
-        name,
-        avatar,
-      });
-    }
-    if (data === null && isSuccess) {
-      toast.success("Login Successfully!");
-    }
-    if (data === null) {
-      setLogout(true);
+        socialAuth({
+          email,
+          name,
+          avatar,
+        });
+      }
+
+      if (data === null && isSuccess) {
+        toast.success("Login Successfully!");
+      }
+      if (data === null) {
+        setLogout(true);
+      }
     }
   }, [data, user]);
 
@@ -101,7 +104,7 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
               {user ? (
                 <Link href='/profile'>
                   <Image
-                    src={user.avatar ? user.avatar : avatar}
+                    src={user.avatar ? user.avatar.url : avatar}
                     alt='avatar'
                     width={30}
                     height={30}
