@@ -31,21 +31,23 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
 
-  const {} = useLogOutQuery(undefined, {
+  useLogOutQuery(undefined, {
     skip: !logout ? true : false,
   });
 
   useEffect(() => {
-    if (!user) {
-      if (data) {
-        socialAuth({
-          email: data?.user?.email,
-          name: data?.user?.name,
-          avatar: data?.user?.image,
-        });
-      }
+    if (!user && data) {
+      const email = data?.user?.email ?? "";
+      const name = data?.user?.name ?? "";
+      const avatar = data?.user?.image ?? "";
+
+      socialAuth({
+        email,
+        name,
+        avatar,
+      });
     }
-    if (data !== null || isSuccess) {
+    if (data === null && isSuccess) {
       toast.success("Login Successfully!");
     }
     if (data === null) {
@@ -53,15 +55,15 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
     }
   }, [data, user]);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 80) {
-        setActive(true);
-      } else {
-        setActive(false);
-      }
-    });
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      setActive(window.scrollY > 80);
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
 
   const handleClose = (e: any) => {
     if (e.target.id === "screen") {
@@ -100,7 +102,7 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
                 <Link href='/profile'>
                   <Image
                     src={user.avatar ? user.avatar : avatar}
-                    alt=''
+                    alt='avatar'
                     width={30}
                     height={30}
                     className='w-[30px] h-[30px] rounded-full cursor-pointer'
@@ -118,7 +120,6 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
           </div>
         </div>
 
-        {/* Mobile sidebar */}
         {openSidebar && (
           <div
             className='fixed w-full h-screen top-0 left-0 z-[9999] dark:bg-[unset] bg-[#00000024]'
@@ -136,32 +137,20 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
           </div>
         )}
       </div>
-      {route === "Login" && (
-        <>
-          {open && (
-            <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={Login} />
-          )}
-        </>
+      {route === "Login" && open && (
+        <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={Login} />
       )}
-      {route === "Sign-Up" && (
-        <>
-          {open && (
-            <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={SignUp} />
-          )}
-        </>
+      {route === "Sign-Up" && open && (
+        <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={SignUp} />
       )}
-      {route === "Verification" && (
-        <>
-          {open && (
-            <CustomModel
-              open={open}
-              setOpen={setOpen}
-              setRoute={setRoute}
-              activeItem={activeItem}
-              component={Verification}
-            />
-          )}
-        </>
+      {route === "Verification" && open && (
+        <CustomModel
+          open={open}
+          setOpen={setOpen}
+          setRoute={setRoute}
+          activeItem={activeItem}
+          component={Verification}
+        />
       )}
     </div>
   );

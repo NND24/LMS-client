@@ -11,14 +11,14 @@ const Page: FC<Props> = (props) => {
   const [route, setRoute] = useState("Login");
 
   return (
-    <div>
+    <>
       <Heading
         title='ELearning'
         description='ELearning is a platform for student to learn'
         keywords='FrontEnd, MERN, Redux'
       />
       <Header open={open} setOpen={setOpen} activeItem={activeItem} setRoute={setRoute} route={route} />
-    </div>
+    </>
   );
 };
 

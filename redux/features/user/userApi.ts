@@ -7,7 +7,7 @@ export const userApi = apiSlice.injectEndpoints({
         url: "update-user-avatar",
         method: "PUT",
         body: { avatar },
-        credentials: "include",
+        credentials: "include" as const,
       }),
     }),
   }),

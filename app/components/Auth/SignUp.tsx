@@ -68,7 +68,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             value={values.name}
             onChange={handleChange}
             id='name'
-            placeholder='Nguyen Van A'
+            placeholder=''
             className={`${errors.name && touched.name && "border-red-500"}
               ${styles.input}
               `}
@@ -85,7 +85,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           value={values.email}
           onChange={handleChange}
           id='email'
-          placeholder='email@gmail.com'
+          placeholder=''
           className={`${errors.email && touched.email && "border-red-500"}
           ${styles.input}
           `}
@@ -102,7 +102,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             value={values.password}
             onChange={handleChange}
             id='password'
-            placeholder='*************'
+            placeholder=''
             className={`${errors.email && touched.email && "border-red-500"}
           ${styles.input}
           `}

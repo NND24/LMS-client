@@ -61,7 +61,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
           value={values.email}
           onChange={handleChange}
           id='email'
-          placeholder='email@gmail.com'
+          placeholder=''
           className={`${errors.email && touched.email ? "border-red-500" : ""} ${styles.input}`}
         />
         {errors.email && touched.email && <span className='text-red-500 pt-2 block'>{errors.email}</span>}
@@ -75,7 +75,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
             value={values.password}
             onChange={handleChange}
             id='password'
-            placeholder='*************'
+            placeholder=''
             className={`${errors.password && touched.password ? "border-red-500" : ""} ${styles.input}`}
           />
           {!show ? (

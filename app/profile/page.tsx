@@ -1,5 +1,4 @@
 "use client";
-
 import React, { FC, useState } from "react";
 import Protected from "../hooks/useProtected";
 import Heading from "../utils/Heading";

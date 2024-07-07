@@ -34,7 +34,7 @@ type LoginData = {
 type SocialAuthData = {
   email: string;
   name: string;
-  password: string;
+  avatar: string;
 };
 
 type SocialAuthResponse = {
@@ -49,7 +49,7 @@ export const authApi = apiSlice.injectEndpoints({
         url: "registration",
         method: "POST",
         body: data,
-        credentials: "include",
+        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -84,7 +84,7 @@ export const authApi = apiSlice.injectEndpoints({
           email,
           password,
         },
-        credentials: "include",
+        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -102,15 +102,15 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     socialAuth: builder.mutation<SocialAuthResponse, SocialAuthData>({
-      query: ({ email, name, password }) => ({
+      query: ({ email, name, avatar }) => ({
         url: "social-auth",
         method: "POST",
         body: {
           email,
           name,
-          password,
+          avatar,
         },
-        credentials: "include",
+        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
@@ -131,7 +131,7 @@ export const authApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "logout",
         method: "GET",
-        credentials: "include",
+        credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
