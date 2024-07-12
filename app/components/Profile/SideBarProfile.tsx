@@ -40,7 +40,7 @@ const SideBarProfile: FC<Props> = ({ user, active, avatar, setActive, logoutHand
         onClick={() => setActive(2)}
       >
         <RiLockPasswordLine size={20} className='dark:text-white text-black' />
-        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-back'>Change Password</h5>
+        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>Change Password</h5>
       </div>
 
       <div
@@ -50,7 +50,7 @@ const SideBarProfile: FC<Props> = ({ user, active, avatar, setActive, logoutHand
         onClick={() => setActive(3)}
       >
         <SiCoursera size={20} className='dark:text-white text-black' />
-        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-back'>Enroll Courses</h5>
+        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>Enroll Courses</h5>
       </div>
 
       {user.role === "admin" && (
@@ -61,7 +61,7 @@ const SideBarProfile: FC<Props> = ({ user, active, avatar, setActive, logoutHand
           href={"/admin"}
         >
           <MdOutlineAdminPanelSettings size={20} className='dark:text-white text-black' />
-          <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-back'>Admin Dashboard</h5>
+          <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>Admin Dashboard</h5>
         </Link>
       )}
 
@@ -72,7 +72,7 @@ const SideBarProfile: FC<Props> = ({ user, active, avatar, setActive, logoutHand
         onClick={() => logoutHandler()}
       >
         <AiOutlineLogout size={20} className='dark:text-white text-black' />
-        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-back'>Log Out</h5>
+        <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>Log Out</h5>
       </div>
     </div>
   );
