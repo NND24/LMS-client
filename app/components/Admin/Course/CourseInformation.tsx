@@ -161,7 +161,7 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
               Demo Url
             </label>
             <input
-              type='text'
+              type='url'
               name=''
               required
               value={courseInfo.demoUrl}
@@ -200,6 +200,8 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
           />
         </div>
       </form>
+      <br />
+      <br />
     </div>
   );
 };
