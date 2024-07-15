@@ -1,4 +1,3 @@
-"use client";
 import React, { FC, useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
@@ -34,10 +33,11 @@ interface itemProps {
 
 const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   return (
-    <MenuItem active={selected === title} onClick={() => setSelected(title)} icon={icon}>
-      <Typography className='!text-[16px] !font-Poppins'>{title}</Typography>
-      <Link href={to} />
-    </MenuItem>
+    <Link href={to}>
+      <MenuItem active={selected === title} onClick={() => setSelected(title)} icon={icon}>
+        <Typography className='!text-[16px] !font-Poppins'>{title}</Typography>
+      </MenuItem>
+    </Link>
   );
 };
 
@@ -87,7 +87,7 @@ const AdminSidebar = () => {
                 <Link href='/'>
                   <h3 className='text-[25px] font-Poppins dark:text-white text-black'>ELearning</h3>
                 </Link>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} className='inline-block'>
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} className='inline-block cursor-pointer'>
                   <ArrowBackIos className='text-black dark:text-[#ffffffc1]' />
                 </IconButton>
               </Box>
@@ -137,7 +137,7 @@ const AdminSidebar = () => {
             >
               {!isCollapsed && "Data"}
             </Typography>
-            <Item title='Users' to='/admin/user' icon={<Groups />} selected={selected} setSelected={setSelected} />
+            <Item title='Users' to='/admin/users' icon={<Groups />} selected={selected} setSelected={setSelected} />
             <Item
               title='Invoices'
               to='/admin/invoices'

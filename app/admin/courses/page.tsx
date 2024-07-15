@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 import AdminSidebar from "@/app/components/Admin/Sidebar/AdminSidebar";
-import Heading from "@/app/utils/Heading";
-import CreateCourse from "../../components/Admin/Course/CreateCourse";
-import DashboardHeader from "@/app/components/Admin/Sidebar/DashboardHeader";
+import DashboardHero from "@/app/components/Admin/Sidebar/DashboardHero";
 import AdminProtected from "@/app/hooks/adminProtected";
+import Heading from "@/app/utils/Heading";
+import React from "react";
+import AllCourses from "../../components/Admin/Course/AllCourses";
 
 type Props = {};
 
@@ -14,16 +14,16 @@ const page = (props: Props) => {
       <AdminProtected>
         <Heading
           title='ELearning - Admin'
-          description='ELearing is a platform for students to learn'
-          keywords='Programming'
+          description='ELearning is a platform for student to learn'
+          keywords='FrontEnd, MERN, Redux'
         />
-        <div className='flex'>
+        <div className='flex h-screen'>
           <div className='1500px:w-[16%] w-1/5'>
             <AdminSidebar />
           </div>
           <div className='w-[85%]'>
-            <DashboardHeader />
-            <CreateCourse />
+            <DashboardHero />
+            <AllCourses />
           </div>
         </div>
       </AdminProtected>
