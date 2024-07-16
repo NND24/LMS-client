@@ -1,13 +1,14 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useTheme } from "next-themes";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import Loader from "../../Loader/Loader";
 import { format } from "timeago.js";
-import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
+import { useDeleteUserMutation, useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import { styles } from "@/app/styles/style";
+import toast from "react-hot-toast";
 
 type Props = {
   isTeam: boolean;
@@ -16,8 +17,25 @@ type Props = {
 const AllUsers: FC<Props> = ({ isTeam }) => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState("");
 
-  const { isLoading, data, error } = useGetAllUsersQuery({});
+  const { isLoading, data, refetch } = useGetAllUsersQuery({}, { refetchOnMountOrArgChange: true });
+  const [deleteUser, { isSuccess: deleteSuccess, error: deleteError }] = useDeleteUserMutation({});
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      setOpen(false);
+      toast.success("User Deleted Successfully");
+      refetch();
+    }
+    if (deleteError) {
+      if ("data" in deleteError) {
+        const errorMessage = deleteError as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+  }, [deleteSuccess, deleteError]);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
@@ -27,18 +45,23 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
     { field: "courses", headerName: "Purchased Courses", flex: 0.5 },
     { field: "created_at", headerName: "Joined At", flex: 0.5 },
     {
-      field: " ",
+      field: "delete",
       headerName: "Delete",
       flex: 0.2,
       renderCell: (params: any) => (
-        <Button>
+        <Button
+          onClick={() => {
+            setOpen(!open);
+            setUserId(params.row.id);
+          }}
+        >
           <AiOutlineDelete className='dark:text-white text-black' size={20} />
         </Button>
       ),
     },
 
     {
-      field: "  ",
+      field: "sendEmail",
       headerName: "Email",
       flex: 0.2,
       renderCell: (params: any) => (
@@ -78,6 +101,12 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
         });
       });
   }
+
+  const handleDelete = async () => {
+    const id = userId;
+    await deleteUser(id);
+    setOpen(false);
+  };
 
   return (
     <div className='mt-[120px]'>
@@ -150,6 +179,29 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
           >
             <DataGrid checkboxSelection rows={rows} columns={columns} />
           </Box>
+          {open && (
+            <Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
+            >
+              <Box className='absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-white p-4'>
+                <h1 className={`${styles.title}`}>Are you sure you want to delete this user?</h1>
+                <div className='flex justify-center mt-4'>
+                  <div
+                    className={`${styles.button} !w-[120px] h-[30px] bg-[#57c7e5] mx-2`}
+                    onClick={() => setOpen(false)}
+                  >
+                    Cancel
+                  </div>
+                  <div className={`${styles.button} !w-[120px] h-[30px] bg-[#d63f3f] mx-2`} onClick={handleDelete}>
+                    Delete
+                  </div>
+                </div>
+              </Box>
+            </Modal>
+          )}
         </Box>
       )}
     </div>
