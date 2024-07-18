@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import Heading from "../utils/Heading";
 import AdminSidebar from "../components/Admin/Sidebar/AdminSidebar";
-import DashboardHero from "../components/Admin/Sidebar/DashboardHero";
+import DashboardHero from "../components/Admin/DashboardHero";
 import AdminProtected from "../hooks/adminProtected";
 
 type Props = {};
@@ -21,7 +21,7 @@ const page: FC<Props> = (props) => {
             <AdminSidebar />
           </div>
           <div className='w-[85%]'>
-            <DashboardHero />
+            <DashboardHero isDashboard={true} />
           </div>
         </div>
       </AdminProtected>
