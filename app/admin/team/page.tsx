@@ -10,22 +10,24 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <AdminProtected>
-      <Heading
-        title='ELearning - Admin'
-        description='ELearning is a platform for student to learn'
-        keywords='FrontEnd, MERN, Redux'
-      />
-      <div className='flex h-screen'>
-        <div className='1500px:w-[16%] w-1/5'>
-          <AdminSidebar />
+    <div className='overflow-hidden h-[100vh]'>
+      <AdminProtected>
+        <Heading
+          title='ELearning - Admin'
+          description='ELearning is a platform for student to learn'
+          keywords='FrontEnd, MERN, Redux'
+        />
+        <div className='flex h-screen'>
+          <div className='1500px:w-[16%] w-1/5'>
+            <AdminSidebar />
+          </div>
+          <div className='w-[85%]'>
+            <DashboardHero />
+            <AllUsers isTeam={true} />
+          </div>
         </div>
-        <div className='w-[85%]'>
-          <DashboardHero />
-          <AllUsers isTeam={true} />
-        </div>
-      </div>
-    </AdminProtected>
+      </AdminProtected>
+    </div>
   );
 };
 

@@ -18,6 +18,8 @@ const UserAnalytics: FC<Props> = ({ isDashboard }) => {
       analyticsData.push({ name: item.month, count: item.count });
     });
 
+  console.log(data);
+
   return (
     <>
       {isLoading ? (
@@ -28,7 +30,7 @@ const UserAnalytics: FC<Props> = ({ isDashboard }) => {
             <h1 className={`${styles.title} ${isDashboard && "!text-[20px]"} px-5 !text-start`}>Users Analytics</h1>
             {!isDashboard && <p className={`${styles.label} px-5`}>Last 12 months analytics data</p>}
           </div>
-          <div className={`w-full ${isDashboard ? "h-[30vh]" : "h-screen"} flex items-center justify-center`}>
+          <div className={`w-full ${isDashboard ? "h-[28vh]" : "h-screen"} flex items-center justify-center`}>
             <ResponsiveContainer width={isDashboard ? "100%" : "90%"} height={isDashboard ? "100%" : "50%"}>
               <AreaChart
                 data={analyticsData}

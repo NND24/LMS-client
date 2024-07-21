@@ -9,7 +9,7 @@ type Props = {};
 
 const page: FC<Props> = (props) => {
   return (
-    <div>
+    <div className='overflow-hidden h-[100vh]'>
       <AdminProtected>
         <Heading
           title='ELearning - Admin'

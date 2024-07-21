@@ -84,7 +84,7 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
       ) : (
         <Box
           m={isDashboard ? "0" : "40px 0 0 0"}
-          height={isDashboard ? "35vh" : "90vh"}
+          height={isDashboard ? "32vh" : "79vh"}
           overflow={"hidden"}
           sx={{
             "& .MuiDataGrid-root": {
@@ -112,6 +112,11 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
             },
             "& .MuiDataGrid-columnHeaders": {
               backgroundColor: theme === "dark" ? "#3e4396" : "#a4a9fc",
+              borderBottom: "none",
+              color: theme === "dark" ? "#fff" : "#000",
+            },
+            "& .MuiDataGrid-container--top [role=row]": {
+              backgroundColor: theme === "dark" ? "#3e4396 !important" : "#a4a9fc !important",
               borderBottom: "none",
               color: theme === "dark" ? "#fff" : "#000",
             },

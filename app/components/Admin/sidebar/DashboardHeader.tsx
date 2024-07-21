@@ -9,7 +9,7 @@ type Props = {
 
 const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
   return (
-    <div className='w-full flex items-center justify-end p-6 fixed top-5 right-5'>
+    <div className='w-full flex items-center justify-end p-6 fixed top-0 right-0'>
       <ThemeSwitcher />
       <div className='relative cursor-pointer m-2' onClick={() => setOpen(!open)}>
         <IoMdNotificationsOutline className='text-2xl cursor-pointer dark:text-white text-black' />

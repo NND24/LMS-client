@@ -40,19 +40,19 @@ const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
 
 const DashboardWidgets: FC<Props> = ({ open, value }) => {
   return (
-    <div className='mt-[30px] min-h-screen'>
+    <div className='min-h-screen'>
       <div className='grid grid-cols-[75%,25%]'>
-        <div className='p-8'>
+        <div className='px-8 pb-8 pt-4'>
           <UserAnalytics isDashboard={true} />
         </div>
 
-        <div className='pt-[80px] pr-8'>
+        <div className='pt-[65px] pr-8'>
           <div className='w-full dark:bg-[#111c43] rounded-sm shadow'>
-            <div className='flex items-center p-5 justify-between'>
+            <div className='flex items-center p-[10px] justify-between'>
               <div className=''>
-                <BiBorderLeft className='dark:text-[#45cba0] text-[#000] text-[30px]' />
-                <h5 className='pt-2 font-Poppins dark:text-white text-black text-[20px]'>120</h5>
-                <h5 className='py-2 font-Poppins dark:text-[#45cba0] text-black text-[20px] font-[400]'>
+                <BiBorderLeft className='dark:text-[#45cba0] text-[#000] text-[25px]' />
+                <h5 className='pt-[5px] font-Poppins dark:text-white text-black text-[18px]'>120</h5>
+                <h5 className='py-[5px] font-Poppins dark:text-[#45cba0] text-black text-[16px] font-[400]'>
                   Sales Obtained
                 </h5>
               </div>
@@ -64,24 +64,28 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
           </div>
 
           <div className='w-full dark:bg-[#111c43] rounded-sm shadow-sm my-8'>
-            <div className='flex items-center p-5 justify-between'>
+            <div className='flex items-center p-[10px] justify-between'>
               <div className=''>
-                <PiUsersFourLight className='dark:text-[#45cba0] text-[#000] text-[30px]' />
-                <h5 className='pt-2 font-Poppins dark:text-white text-black text-[20px]'>450</h5>
-                <h5 className='py-2 font-Poppins dark:text-[#45cba0] text-black text-[20px] font-[400]'>New Users</h5>
+                <PiUsersFourLight className='dark:text-[#45cba0] text-[#000] text-[25px]' />
+                <h5 className='pt-[5px] font-Poppins dark:text-white text-black text-[18px]'>450</h5>
+                <h5 className='py-[5px] font-Poppins dark:text-[#45cba0] text-black text-[16px] font-[400]'>
+                  New Users
+                </h5>
+              </div>
+              <div>
+                <CircularProgressWithLabel value={100} open={open} />
+                <h5 className='text-center pt-4'>+150%</h5>
               </div>
             </div>
-            <CircularProgressWithLabel value={100} open={open} />
-            <h5 className='text-center pt-4'>+150%</h5>
           </div>
         </div>
       </div>
 
-      <div className='grid grid-cols-[65%,35%] mt-[-20px]'>
-        <div className='dark:bg-[#111c43] w-[94%] mt-[30px] h-[40vh] shadow-sm m-auto'>
+      <div className='grid grid-cols-[65%,35%] mt-[-40px]'>
+        <div className='dark:bg-[#111c43] w-[94%] mt-[30px] ml-[30px] h-[35vh] shadow-sm m-auto'>
           <OrderAnalytics isDashboard={true} />
         </div>
-        <div className='p-5'>
+        <div className='p-4'>
           <h5 className='dark:text-[#fff] text-black text-[20px] font-[400] font-Poppins'>Recent Transaction</h5>
           <AllInvoices isDashboard={true} />
         </div>

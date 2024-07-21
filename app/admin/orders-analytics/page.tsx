@@ -10,7 +10,7 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div>
+    <div className='overflow-hidden h-[100vh]'>
       <AdminProtected>
         <Heading
           title='ELearning - Admin'
@@ -23,7 +23,7 @@ const page = (props: Props) => {
           </div>
           <div className='w-[85%]'>
             <DashboardHeader />
-            <OrderAnalytics />
+            <OrderAnalytics isDashboard={false} />
           </div>
         </div>
       </AdminProtected>

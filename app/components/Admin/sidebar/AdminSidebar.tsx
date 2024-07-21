@@ -64,6 +64,7 @@ const AdminSidebar = () => {
           backgroundColor: `${theme === "dark" && "#142150 !important"}`,
         },
       }}
+      className='z-[9999]'
     >
       <Sidebar
         collapsed={isCollapsed}
@@ -176,7 +177,7 @@ const AdminSidebar = () => {
               {!isCollapsed && "Customization"}
             </Typography>
             <Item title='Hero' to='/admin/hero' icon={<Web />} selected={selected} setSelected={setSelected} />
-            <Item title='FAQ' to='/faq' icon={<Quiz />} selected={selected} setSelected={setSelected} />
+            <Item title='FAQ' to='/admin/faq' icon={<Quiz />} selected={selected} setSelected={setSelected} />
             <Item
               title='Categories'
               to='/admin/categories'

@@ -23,12 +23,12 @@ const OrderAnalytics: FC<Props> = ({ isDashboard }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className={`${!isDashboard ? "h-[30vh]" : "h-screen"}`}>
+        <div className={`${isDashboard ? "h-[25vh]" : "h-screen"}`}>
           <div className={`${isDashboard ? "mt-[0px] pl-[40px] mb-2" : "mt-[50px]"}`}>
             <h1 className={`${styles.title} ${isDashboard && "!text-[20px]"} px-5 !text-start`}>Orders Analytics</h1>
             {!isDashboard && <p className={`${styles.label} px-5`}>Last 12 months analytics data</p>}
           </div>
-          <div className={`w-full ${isDashboard ? "h-[90%]" : "h-full"} flex items-center justify-center`}>
+          <div className={`w-full ${!isDashboard ? "h-[90%]" : "h-full"} flex items-center justify-center`}>
             <ResponsiveContainer width={isDashboard ? "100%" : "90%"} height={isDashboard ? "100%" : "50%"}>
               <LineChart
                 width={500}
@@ -37,7 +37,7 @@ const OrderAnalytics: FC<Props> = ({ isDashboard }) => {
                 margin={{
                   top: 5,
                   right: 30,
-                  left: 20,
+                  left: 0,
                   bottom: 5,
                 }}
               >
