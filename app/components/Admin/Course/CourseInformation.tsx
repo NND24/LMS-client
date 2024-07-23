@@ -1,5 +1,6 @@
 import { styles } from "@/app/styles/style";
 import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
+import Image from "next/image";
 import React, { FC, useEffect, useState } from "react";
 
 type Props = {
@@ -19,6 +20,8 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
       setCategories(data.layout.categories);
     }
   }, [data]);
+
+  console.log(data);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -156,7 +159,7 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             <select
               name=''
               id=''
-              className={`${styles.input}`}
+              className={`${styles.input} dark:bg-[#06080D] bg-[#EEEEEE]`}
               value={courseInfo.category}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, category: e.target.value })}
             >
@@ -215,7 +218,7 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             onDrop={handleDrop}
           >
             {courseInfo.thumbnail ? (
-              <img src={courseInfo.thumbnail} alt='' className='max-h-full w-full object-cover' />
+              <Image src={courseInfo.thumbnail} alt='' className='max-h-full w-full object-cover' />
             ) : (
               <span className='text-black dark:text-white'>Drag and drop your thumbnail here or click to browse</span>
             )}

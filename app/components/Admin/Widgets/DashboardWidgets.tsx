@@ -81,11 +81,11 @@ const DashboardWidgets: FC<Props> = ({ open, value }) => {
         </div>
       </div>
 
-      <div className='grid grid-cols-[65%,35%] mt-[-40px]'>
+      <div className='grid grid-cols-[65%,35%] mt-[-20px]'>
         <div className='dark:bg-[#111c43] w-[94%] mt-[30px] ml-[30px] h-[35vh] shadow-sm m-auto'>
           <OrderAnalytics isDashboard={true} />
         </div>
-        <div className='p-4'>
+        <div className='py-4 pr-[30px] pl-4'>
           <h5 className='dark:text-[#fff] text-black text-[20px] font-[400] font-Poppins'>Recent Transaction</h5>
           <AllInvoices isDashboard={true} />
         </div>
