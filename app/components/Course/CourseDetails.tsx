@@ -115,10 +115,10 @@ const CourseDetails: FC<Props> = ({ data }) => {
                 <h1 className='pt-5 text-[25px] text-black dark:text-white'>
                   {data.price === 0 ? "Free" : data.price + "$"}
                 </h1>
-                <h5 className='pl-3 text-[20px] mt-2 line-thought opacity-80 text-black dark:text-white'>
-                  {data.estimatedPrice}$
-                </h5>
-                <h4 className='pl-5 pt-4 text-[22px] text-black dark:text-white'>{discountPercentagePrice}% Off</h4>
+                {data?.estimatedPrice != 0 && (
+                  <h5 className='pl-3 text-[20px] mt-2 line-through opacity-80'>{data?.estimatedPrice}$</h5>
+                )}
+                {discountPercentage > 0 && <h4 className='pl-5 pt-4 text-[22px]'>{discountPercentagePrice}% Off</h4>}
               </div>
               <div className='flex items-center'>
                 {isPurchased ? (
@@ -133,7 +133,7 @@ const CourseDetails: FC<Props> = ({ data }) => {
                     className={`${styles.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
                     onClick={handleOrder}
                   >
-                    Buy Now {data.price}
+                    Buy Now {data?.price == 0 ? "" : data?.price + "$"}
                   </div>
                 )}
               </div>

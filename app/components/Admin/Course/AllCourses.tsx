@@ -76,7 +76,7 @@ const AllCourses = (props: Props) => {
     data.courses.forEach((item: any) => {
       rows.push({
         id: item._id,
-        title: item.title,
+        title: item.name,
         purchased: item.purchased,
         ratings: item.ratings,
         created_at: format(item.createdAt),
@@ -121,6 +121,7 @@ const AllCourses = (props: Props) => {
                 borderBottom: "none",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               },
               "& .name-column--cell": {
                 color: theme === "dark" ? "#fff" : "#000",
@@ -134,6 +135,9 @@ const AllCourses = (props: Props) => {
                 backgroundColor: theme === "dark" ? "#3e4396 !important" : "#a4a9fc !important",
                 borderBottom: "none",
                 color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-columnHeaderTitleContainer": {
+                justifyContent: "center",
               },
               "& .MuiDataGrid-virtualScroller": {
                 backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",
@@ -160,7 +164,7 @@ const AllCourses = (props: Props) => {
               aria-labelledby='modal-modal-title'
               aria-describedby='modal-modal-description'
             >
-              <Box className='absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-white p-4'>
+              <Box className='absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-[#101525] p-4'>
                 <h1 className={`${styles.title}`}>Are you sure you want to delete this course?</h1>
                 <div className='flex justify-center mt-4'>
                   <div

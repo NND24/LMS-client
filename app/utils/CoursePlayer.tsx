@@ -22,6 +22,8 @@ const CoursePlayer: FC<Props> = ({ videoUrl, title }) => {
       });
   }, [videoUrl]);
 
+  console.log(videoData);
+
   return (
     <div style={{ paddingTop: "41%", position: "relative" }}>
       {videoData.otp && videoData.playbackInfo !== "" && (

@@ -21,8 +21,6 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
     }
   }, [data]);
 
-  console.log(data);
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setActive(active + 1);
@@ -48,7 +46,7 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
 
   const handleDragLeave = (e: any) => {
     e.preventDefault();
-    setDragging(true);
+    setDragging(false);
   };
 
   const handleDrop = (e: any) => {
@@ -72,12 +70,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
     <div className='w-[80%] m-auto mt-24'>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor='name' className={`${styles.label}`}>
             Course Name
           </label>
           <input
             type='text'
-            name=''
+            name='name'
             required
             value={courseInfo.name}
             onChange={(e: any) => setCourseInfo({ ...courseInfo, name: e.target.value })}
@@ -88,12 +86,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
         </div>
         <br />
         <div className='mt-5'>
-          <label htmlFor='' className={`${styles.label}`}>
+          <label htmlFor='description' className={`${styles.label}`}>
             Course Description
           </label>
           <textarea
-            name=''
-            id=''
+            name='description'
+            id='description'
             cols={30}
             rows={8}
             placeholder='...'
@@ -105,12 +103,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
         <br />
         <div className='w-full flex justify-between'>
           <div className='w-[45%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='price' className={`${styles.label}`}>
               Course Price
             </label>
             <input
               type='number'
-              name=''
+              name='price'
               required
               value={courseInfo.price}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, price: e.target.value })}
@@ -120,12 +118,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             />
           </div>
           <div className='w-[50%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='estimatedPrice' className={`${styles.label}`}>
               Estimated Price (optional)
             </label>
             <input
               type='number'
-              name=''
+              name='estimatedPrice'
               required
               value={courseInfo.estimatedPrice}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })}
@@ -138,12 +136,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
         <br />
         <div className='w-full flex justify-between'>
           <div className='w-[45%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='tags' className={`${styles.label}`}>
               Course Tags
             </label>
             <input
               type='text'
-              name=''
+              name='tags'
               required
               value={courseInfo.tags}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, tags: e.target.value })}
@@ -153,15 +151,15 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             />
           </div>
           <div className='w-[50%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='categories' className={`${styles.label}`}>
               Course Categories
             </label>
             <select
-              name=''
-              id=''
-              className={`${styles.input} dark:bg-[#06080D] bg-[#EEEEEE]`}
-              value={courseInfo.category}
-              onChange={(e: any) => setCourseInfo({ ...courseInfo, category: e.target.value })}
+              name='categories'
+              id='categories'
+              className={`${styles.input} dark:bg-[#080C14] bg-[#EEEEEE]`}
+              value={courseInfo.categories}
+              onChange={(e: any) => setCourseInfo({ ...courseInfo, categories: e.target.value })}
             >
               <option value=''>Select Category</option>
               {categories.map((item: any) => (
@@ -175,12 +173,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
         <br />
         <div className='w-full flex justify-between'>
           <div className='w-[45%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='level' className={`${styles.label}`}>
               Course Level
             </label>
             <input
               type='text'
-              name=''
+              name='level'
               required
               value={courseInfo.level}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, level: e.target.value })}
@@ -190,12 +188,12 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             />
           </div>
           <div className='w-[50%]'>
-            <label htmlFor='' className={`${styles.label}`}>
+            <label htmlFor='demoUrl' className={`${styles.label}`}>
               Demo Url
             </label>
             <input
-              type='url'
-              name=''
+              type='text'
+              name='demoUrl'
               required
               value={courseInfo.demoUrl}
               onChange={(e: any) => setCourseInfo({ ...courseInfo, demoUrl: e.target.value })}
@@ -218,7 +216,13 @@ const CourseInformation: FC<Props> = ({ courseInfo, setCourseInfo, active, setAc
             onDrop={handleDrop}
           >
             {courseInfo.thumbnail ? (
-              <Image src={courseInfo.thumbnail} alt='' className='max-h-full w-full object-cover' />
+              <Image
+                src={courseInfo.thumbnail}
+                alt='Course Thumbnail'
+                width={500}
+                height={300}
+                className='max-h-full w-full object-cover'
+              />
             ) : (
               <span className='text-black dark:text-white'>Drag and drop your thumbnail here or click to browse</span>
             )}

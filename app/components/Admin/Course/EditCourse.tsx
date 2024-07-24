@@ -17,7 +17,7 @@ const EditCourse: FC<Props> = ({ id }) => {
   const [editCourse, { isSuccess, error }] = useEditCourseMutation();
   const { data, refetch } = useGetAllCoursesQuery({}, { refetchOnMountOrArgChange: true });
 
-  const editCourseData = data && data.course.find((i: any) => i._id === id);
+  const editCourseData = data && data.courses.find((i: any) => i._id === id);
 
   const [active, setActive] = useState(0);
 
@@ -29,6 +29,7 @@ const EditCourse: FC<Props> = ({ id }) => {
         price: editCourseData.price,
         estimatedPrice: editCourseData?.estimatedPrice,
         tags: editCourseData.tags,
+        categories: editCourseData.categories,
         thumbnail: editCourseData?.thumbnail?.url,
         level: editCourseData.level,
         demoUrl: editCourseData.demoUrl,
@@ -46,6 +47,7 @@ const EditCourse: FC<Props> = ({ id }) => {
     estimatedPrice: "",
     tags: "",
     level: "",
+    categories: "",
     demoUrl: "",
     thumbnail: "",
   });
@@ -57,6 +59,7 @@ const EditCourse: FC<Props> = ({ id }) => {
       title: "",
       description: "",
       videoSection: "Untitled Section",
+      videoLength: "",
       links: [
         {
           title: "",
@@ -88,6 +91,7 @@ const EditCourse: FC<Props> = ({ id }) => {
       videoUrl: courseContent.videoUrl,
       title: courseContent.title,
       description: courseContent.description,
+      videoLength: courseContent.videoLength,
       videoSection: courseContent.videoSection,
       links: courseContent.links.map((link) => ({
         title: link.title,
@@ -102,12 +106,13 @@ const EditCourse: FC<Props> = ({ id }) => {
       price: courseInfo.price,
       estimatedPrice: courseInfo.estimatedPrice,
       tags: courseInfo.tags,
+      categories: courseInfo.categories,
       thumbnail: courseInfo.thumbnail,
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
       totalVideos: courseContentData.length,
       benefits: formattedBenefits,
-      prerequisites: formattedBenefits,
+      prerequisites: formattedPrerequisites,
       courseData: formattedCourseContentData,
     };
 
@@ -118,6 +123,8 @@ const EditCourse: FC<Props> = ({ id }) => {
     const data = courseData;
     await editCourse({ id: editCourseData?._id, data });
   };
+
+  console.log(data);
 
   return (
     <div className='w-full flex min-h-screen'>

@@ -33,14 +33,16 @@ const CoursePreview: FC<Props> = ({ active, setActive, courseData, handleCourseC
       </div>
 
       <div className='flex items-center text-black dark:text-[#fff]'>
-        <h1 className='pt-5 text-[25px]'>{courseData?.price === 0 ? "Free" : courseData?.price + "$"}</h1>
-        <h5 className='pl-3 text-[20px] mt-2 line-through opacity-80'>{courseData?.estimatedPrice}$</h5>
-        <h4 className='pl-5 pt-4 text-[22px]'>{discountPercentagePrice}% Off</h4>
+        <h1 className='pt-5 text-[25px]'>{courseData?.price == 0 ? "Free" : courseData?.price + "$"}</h1>
+        {courseData?.estimatedPrice != 0 && (
+          <h5 className='pl-3 text-[20px] mt-2 line-through opacity-80'>{courseData?.estimatedPrice}$</h5>
+        )}
+        {discountPercentage > 0 && <h4 className='pl-5 pt-4 text-[22px]'>{discountPercentagePrice}% Off</h4>}
       </div>
 
       <div className='flex items-center'>
         <div className={`${styles.button} !w-auto my-3 font-Poppins !bg-[crimson] cursor-not-allowed`}>
-          Buy Now {courseData?.price}$
+          Buy Now {courseData?.price == 0 ? "" : courseData?.price + "$"}
         </div>
       </div>
 
