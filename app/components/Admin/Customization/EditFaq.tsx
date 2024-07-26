@@ -1,4 +1,3 @@
-import { styles } from "@/app/styles/style";
 import { useEditLayoutMutation, useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -6,11 +5,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import Loader from "../../Loader/Loader";
+import { styles } from "@/app/styles/style";
 
 type Props = {};
 
 const EditFaq = (props: Props) => {
-  const { data, isLoading } = useGetHeroDataQuery("FAQ", { refetchOnMountOrArgChange: true });
+  const { data, isLoading, refetch } = useGetHeroDataQuery("FAQ", { refetchOnMountOrArgChange: true });
   const [questions, setQuestions] = useState<any[]>([]);
   const [editLayout, { isSuccess: layoutSuccess, error }] = useEditLayoutMutation();
 
@@ -20,6 +20,7 @@ const EditFaq = (props: Props) => {
     }
     if (layoutSuccess) {
       toast.success("FAQ updated successfully");
+      refetch();
     }
     if (error) {
       if ("data" in error) {
@@ -42,13 +43,14 @@ const EditFaq = (props: Props) => {
   };
 
   const newFaqHandler = () => {
-    setQuestions([
-      ...questions,
-      {
-        question: "",
-        answer: "",
-      },
-    ]);
+    if (
+      questions.length > 0 &&
+      (questions[questions.length - 1].question === "" || questions[questions.length - 1].answer === "")
+    ) {
+      toast.error("Both question and answer fields must be filled out before adding a new FAQ");
+    } else {
+      setQuestions([...questions, { _id: Date.now().toString(), question: "", answer: "", active: true }]);
+    }
   };
 
   const areQuestionsUnchanged = (originalQuestions: any[], newQuestions: any[]) => {
@@ -60,7 +62,7 @@ const EditFaq = (props: Props) => {
   };
 
   const handleEdit = async () => {
-    if (!areQuestionsUnchanged(data.layout.faq.questions, questions) && !isAnyQuestionEmpty(questions)) {
+    if (!areQuestionsUnchanged(data.layout.faq, questions) && !isAnyQuestionEmpty(questions)) {
       await editLayout({
         type: "FAQ",
         faq: questions,
@@ -73,14 +75,14 @@ const EditFaq = (props: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className='w-[90%] 800px:w-[80%] m-auto mt-[120px]'>
+        <div className='w-[90%] 800px:w-[80%] m-auto mt-[80px] relative'>
           <div className='mt-12'>
             <dl className='space-y-8'>
               {questions.map((q: any) => (
-                <div key={q._id} className={`${q._id !== questions[0]?._id && "border-t"} border-gray-200 pt-6`}>
+                <div key={q._id} className={`${q._id !== questions[0]?._id && "border-t"} border-gray-200 pt-4 !mt-2`}>
                   <dt className='text-lg'>
                     <button
-                      className='flex items-start dark:text-white text-black justify-between w-full text-left focus:outline-none'
+                      className='flex dark:text-white text-black justify-between w-full text-left focus:outline-none'
                       onClick={() => toggleQuestions(q._id)}
                     >
                       <input
@@ -125,17 +127,22 @@ const EditFaq = (props: Props) => {
           </div>
 
           <div
-            className={`${styles.button} !w-[100px] !min-h-[40px] dark:text-white text-black bg-[#cccccc34] ${
+            className={`${styles.button} !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34] ${
               areQuestionsUnchanged(data.layout.faq, questions) || isAnyQuestionEmpty(questions)
                 ? "!cursor-not-allowed"
                 : "!cursor-pointer !bg-[#42d383]"
-            } !rounded absolute bottom-12 right-12`}
+            } !rounded absolute bottom-8 right-[-30px]`}
             onClick={
               areQuestionsUnchanged(data.layout.faq, questions) || isAnyQuestionEmpty(questions)
                 ? () => null
                 : handleEdit
             }
-          ></div>
+          >
+            Save
+          </div>
+
+          <br />
+          <br />
         </div>
       )}
     </>

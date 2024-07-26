@@ -9,7 +9,7 @@ type Props = {
 };
 
 const UserAnalytics: FC<Props> = ({ isDashboard }) => {
-  const { data, isLoading, isError } = useGetUsersAnalyticsQuery({});
+  const { data, isLoading } = useGetUsersAnalyticsQuery({});
 
   const analyticsData: any = [];
 
@@ -17,8 +17,6 @@ const UserAnalytics: FC<Props> = ({ isDashboard }) => {
     data.users.last12Months.forEach((item: any) => {
       analyticsData.push({ name: item.month, count: item.count });
     });
-
-  console.log(data);
 
   return (
     <>

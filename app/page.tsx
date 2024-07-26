@@ -24,7 +24,7 @@ const Page: FC<Props> = (props) => {
       />
       <Header open={open} setOpen={setOpen} activeItem={activeItem} setRoute={setRoute} route={route} />
       <Hero />
-      <Courses />
+      {/* <Courses /> */}
       <Reviews />
       <FAQ />
       <Footer />

@@ -13,9 +13,8 @@ type Props = {
 };
 
 const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrerequisites, active, setActive }) => {
-  const handleBenefitChange = (index: number, value: any) => {
-    const updatedBenefits = [...benefits];
-    updatedBenefits[index].title = value;
+  const handleBenefitChange = (index: number, value: string) => {
+    const updatedBenefits = benefits.map((benefit, i) => (i === index ? { ...benefit, title: value } : benefit));
     setBenefits(updatedBenefits);
   };
 
@@ -23,9 +22,10 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
     setBenefits([...benefits, { title: "" }]);
   };
 
-  const handlePrerequisiteChange = (index: number, value: any) => {
-    const updatedPrerequisites = [...prerequisites];
-    updatedPrerequisites[index].title = value;
+  const handlePrerequisiteChange = (index: number, value: string) => {
+    const updatedPrerequisites = prerequisites.map((prerequisite, i) =>
+      i === index ? { ...prerequisite, title: value } : prerequisite
+    );
     setPrerequisites(updatedPrerequisites);
   };
 
@@ -41,12 +41,12 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
     if (benefits[benefits.length - 1]?.title !== "" && prerequisites[prerequisites.length - 1]?.title !== "") {
       setActive(active + 1);
     } else {
-      toast.error("Please fill the fields for go to next");
+      toast.error("Please fill the fields to go to next");
     }
   };
 
   return (
-    <div className='w-[80%] m-auto mt-24 block'>
+    <div className='w-[80%] m-auto mt-20 block'>
       <div>
         <label htmlFor='benefit' className={`${styles.label} text-[20px]`}>
           What are the benefits for students in this course?
@@ -56,7 +56,7 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
           <input
             type='text'
             key={index}
-            name='Benefit'
+            name='benefit'
             placeholder='You will build a full stack LMS Platform...'
             required
             className={`${styles.input} my-2`}
@@ -76,7 +76,7 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
           <input
             type='text'
             key={index}
-            name='Prerequisite'
+            name='prerequisite'
             placeholder='Basic knowledge of HTML...'
             required
             className={`${styles.input} my-2`}
@@ -91,14 +91,14 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
       <div className='w-full flex items-center justify-between'>
         <div
           className='w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer'
-          onClick={() => prevButton()}
+          onClick={prevButton}
         >
           Prev
         </div>
         <div
           className='w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff]
           rounded mt-8 cursor-pointer'
-          onClick={() => handleOptions()}
+          onClick={handleOptions}
         >
           Next
         </div>

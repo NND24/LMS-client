@@ -20,6 +20,17 @@ const EditCourse: FC<Props> = ({ id }) => {
   const editCourseData = data && data.courses.find((i: any) => i._id === id);
 
   const [active, setActive] = useState(0);
+  const [courseInfo, setCourseInfo] = useState({
+    name: "",
+    description: "",
+    price: "",
+    estimatedPrice: "",
+    tags: "",
+    level: "",
+    categories: "",
+    demoUrl: "",
+    thumbnail: "",
+  });
 
   useEffect(() => {
     if (editCourseData) {
@@ -40,17 +51,6 @@ const EditCourse: FC<Props> = ({ id }) => {
     }
   }, [editCourseData]);
 
-  const [courseInfo, setCourseInfo] = useState({
-    name: "",
-    description: "",
-    price: "",
-    estimatedPrice: "",
-    tags: "",
-    level: "",
-    categories: "",
-    demoUrl: "",
-    thumbnail: "",
-  });
   const [benefits, setBenefits] = useState([{ title: "" }]);
   const [prerequisites, setPrerequisites] = useState([{ title: "" }]);
   const [courseContentData, setCourseContentData] = useState([
@@ -122,9 +122,8 @@ const EditCourse: FC<Props> = ({ id }) => {
   const handleCourseCreate = async (e: any) => {
     const data = courseData;
     await editCourse({ id: editCourseData?._id, data });
+    console.log(data);
   };
-
-  console.log(data);
 
   return (
     <div className='w-full flex min-h-screen'>

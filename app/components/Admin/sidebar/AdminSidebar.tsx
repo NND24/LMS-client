@@ -14,6 +14,7 @@ import {
   HomeOutlined,
   ManageHistory,
   MapOutlined,
+  OndemandVideo,
   PeopleOutline,
   Quiz,
   ReceiptOutlined,
@@ -164,7 +165,7 @@ const AdminSidebar = () => {
             <Item
               title='Live Course'
               to='/admin/courses'
-              icon={<Groups />}
+              icon={<OndemandVideo />}
               selected={selected}
               setSelected={setSelected}
             />

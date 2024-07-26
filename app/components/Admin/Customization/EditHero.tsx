@@ -55,6 +55,8 @@ const AllHero = (props: Props) => {
     });
   };
 
+  console.log(data);
+
   return (
     <>
       <div className='w-full 1000px:flex items-center'>
@@ -62,8 +64,10 @@ const AllHero = (props: Props) => {
           <div className='1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10 '>
             <div className='relative'>
               <Image
-                src={hero}
+                src={image}
                 alt=''
+                width={400}
+                height={400}
                 className='object-contain 1100px:max-w-[75%] w-[75%] 1500px:max-w-[85%] h-[auto] z-[10]'
               />
               <input type='file' name='' id='banner' accept='image/*' onChange={handleUpdate} className='hidden' />
@@ -89,6 +93,8 @@ const AllHero = (props: Props) => {
               onChange={(e) => setSubTitle(e.target.value)}
               rows={4}
             />
+            <br />
+            <br />
             <div
               className={`${styles.button} !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34]
                 ${

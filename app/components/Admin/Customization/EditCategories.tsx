@@ -34,10 +34,10 @@ const EditCategories = (props: Props) => {
   };
 
   const newCategoriesHandler = () => {
-    if (categories[categories.length - 1].title === "") {
+    if (categories.length > 0 && categories[categories.length - 1].title === "") {
       toast.error("Category title cannot be empty");
     } else {
-      setCategories((prevCategory: any) => [...prevCategory, { title: "" }]);
+      setCategories((prevCategory: any) => [...prevCategory, { _id: Date.now().toString(), title: "" }]);
     }
   };
 
@@ -53,7 +53,7 @@ const EditCategories = (props: Props) => {
     if (!areCategoriesUnchanged(data.layout.categories, categories) && !isAnyCategoryTitleEmpty(categories)) {
       await editLayout({
         type: "Categories",
-        faq: categories,
+        categories: categories,
       });
     }
   };
@@ -63,13 +63,13 @@ const EditCategories = (props: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className='mt-[120px] text-center'>
+        <div className='w-[90%] 800px:w-[80%] m-auto mt-[80px] text-center relative'>
           <h1 className={`${styles.title}`}>All Categories</h1>
           {categories &&
             categories.map((item: any, index: number) => {
               return (
-                <div className='p-3' key={index}>
-                  <div className='flex items-center w-full justify-center'>
+                <div className='p-3 flex items-center justify-center' key={item._id}>
+                  <div className='flex items-center w-[50%] justify-center'>
                     <input
                       type='text'
                       className={`${styles.input} !unset !border-none !text-[20px]`}
@@ -96,11 +96,13 @@ const EditCategories = (props: Props) => {
             />
           </div>
           <div
-            className={`${styles.button} !w-full !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34] *:${
+            className={`${
+              styles.button
+            } !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34] *:${
               areCategoriesUnchanged(data.layout.categories, categories) || isAnyCategoryTitleEmpty(categories)
                 ? "!cursor-not-allowed"
                 : "!cursor-pointer !bg-[#42d383]"
-            } !rounded absolute bottom-12 right-12`}
+            } !rounded absolute bottom-8 right-[-30px]`}
             onClick={
               areCategoriesUnchanged(data.layout.categories, categories) || isAnyCategoryTitleEmpty(categories)
                 ? () => null
@@ -109,6 +111,9 @@ const EditCategories = (props: Props) => {
           >
             Save
           </div>
+
+          <br />
+          <br />
         </div>
       )}
     </>
