@@ -2,26 +2,32 @@ import { styles } from "@/app/styles/style";
 import CoursePlayer from "@/app/utils/CoursePlayer";
 import Ratings from "@/app/utils/Ratings";
 import Link from "next/link";
-import React, { FC } from "react";
-import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import React, { FC, useState } from "react";
+import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import CourseContentList from "../Course/CourseContentList";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckOutForm from "../Payment/CheckOutForm";
 
 type Props = {
   data: any;
+  clientSecret: string;
+  stripePromise: any;
 };
 
-const CourseDetails: FC<Props> = ({ data }) => {
+const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise }) => {
   const { user } = useSelector((state: any) => state.auth);
-  const discountPercentage = ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
 
+  const [open, setOpen] = useState(false);
+
+  const discountPercentage = ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
   const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id);
 
   const handleOrder = (e: any) => {
-    console.log(e);
+    setOpen(true);
   };
 
   return (
@@ -118,7 +124,7 @@ const CourseDetails: FC<Props> = ({ data }) => {
                 {data?.estimatedPrice != 0 && (
                   <h5 className='pl-3 text-[20px] mt-2 line-through opacity-80'>{data?.estimatedPrice}$</h5>
                 )}
-                {discountPercentage > 0 && <h4 className='pl-5 pt-4 text-[22px]'>{discountPercentagePrice}% Off</h4>}
+                {discountPercentage > 0 && <h4 className='pl-5 pt-5 text-[22px]'>{discountPercentagePrice}% Off</h4>}
               </div>
               <div className='flex items-center'>
                 {isPurchased ? (
@@ -146,6 +152,25 @@ const CourseDetails: FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
+
+      <>
+        {open && (
+          <div className='w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center'>
+            <div className='w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3'>
+              <div className='w-full flex justify-end'>
+                <IoCloseOutline size={40} className='text-black cursor-pointer' onClick={() => setOpen(false)} />
+              </div>
+              <div className='w-full'>
+                {stripePromise && clientSecret && (
+                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <CheckOutForm setOpen={setOpen} data={data} />
+                  </Elements>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </>
     </div>
   );
 };
