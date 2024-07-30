@@ -34,7 +34,7 @@ const CourseContentList: FC<Props> = ({ data, activeVideo, setActiveVideo, isDem
   };
 
   return (
-    <div className={`mt-[15px] w-full ${!isDemo && "ml-[30px] sticky top-24 left-0 z-30"}`}>
+    <div className={`mt-[15px] w-full ${!isDemo && "my-[15px] sticky top-24 left-0 z-30"}`}>
       {videoSections.map((section: string) => {
         const isSectionVisible = visibleSections.has(section);
 
@@ -49,7 +49,7 @@ const CourseContentList: FC<Props> = ({ data, activeVideo, setActiveVideo, isDem
         const sectionContentHours: number = sectionVideoLength / 60;
 
         return (
-          <div className={`${isDemo && "border-b border-[#ffffff8e] pb-2"}`} key={section}>
+          <div className={`${isDemo ? "border-b border-[#ffffff8e] pb-2" : ""}`} key={section}>
             <div className='w-full flex'>
               <div className='w-full flex justify-between items-center'>
                 <h2 className='text-[22px] text-black dark:text-white'>{section}</h2>
