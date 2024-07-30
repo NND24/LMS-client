@@ -9,6 +9,7 @@ import { format } from "timeago.js";
 import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../Payment/CheckOutForm";
+import Image from "next/image";
 
 type Props = {
   data: any;
@@ -82,34 +83,39 @@ const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise }) => {
                       Rating • {data?.reviews?.length} Reviews
                     </h5>
                   </div>
-
-                  <br />
-                  {(data?.reviews && [...data.reviews].reverse()).map((item: any, index: number) => (
-                    <div className='w-full pb-4' key={index}>
-                      <div className='flex'>
-                        <div className='w-[50px] h-[50px]'>
-                          <div className='w-[50px] h-[50px] bg-slate-600 rounded-[50px] flex items-center justify-center cursor-pointer'>
-                            <h1 className='uppercase text-[18px] text-black dark:text-white'>
-                              {item.user.name.slice(0, 2)}
-                            </h1>
-                          </div>
-                        </div>
-                        <div className='hidden 800px:block pl-2'>
-                          <div className='flex items-center'>
-                            <h5 className='text-[18px] pr-2 text-black dark:text-white'>{item.user.name}</h5>
-                            <Ratings rating={item.rating} />
-                          </div>
-                          <p className='text-black dark:text-white'>{item.comment}</p>
-                          <small className='text-[#000000c1] dark:text-[#ffffff83]'>{format(item.createdAt)} •</small>
-                        </div>
-                        <div className='pl-2 flex 800px:hidden items-center'>
+                </div>
+                <br />
+                {(data?.reviews && [...data.reviews].reverse()).map((item: any, index: number) => (
+                  <div className='w-full pb-4' key={index}>
+                    <div className='flex'>
+                      <div className='w-[50px] h-[50px]'>
+                        <Image
+                          src={
+                            item.user.avatar
+                              ? item.user.avatar.url
+                              : "https://res.cloudinary.com/datnguyen240/image/upload/v1722168751/avatars/avatar_pnncdk.png"
+                          }
+                          width={50}
+                          height={50}
+                          alt=''
+                          className='w-[50px] h-[50px] rounded-full object-cover'
+                        />
+                      </div>
+                      <div className='hidden 800px:block pl-2'>
+                        <div className='flex items-center'>
                           <h5 className='text-[18px] pr-2 text-black dark:text-white'>{item.user.name}</h5>
                           <Ratings rating={item.rating} />
                         </div>
+                        <p className='text-black dark:text-white'>{item.comment}</p>
+                        <small className='text-[#000000c1] dark:text-[#ffffff83]'>{format(item.createdAt)} •</small>
+                      </div>
+                      <div className='pl-2 flex 800px:hidden items-center'>
+                        <h5 className='text-[18px] pr-2 text-black dark:text-white'>{item.user.name}</h5>
+                        <Ratings rating={item.rating} />
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
