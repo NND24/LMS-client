@@ -14,6 +14,7 @@ import avatar from "../../public/assets/avatar.png";
 import { useSession } from "next-auth/react";
 import { useLogOutQuery, useSocialAuthMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 
 type Props = {
   open: boolean;
@@ -26,7 +27,7 @@ type Props = {
 const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
-  const { user } = useSelector((state: any) => state.auth);
+  const { data: userData, isLoading, refetch } = useLoadUserQuery(undefined, {});
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
@@ -36,27 +37,27 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
   });
 
   useEffect(() => {
-    if (!user && data) {
-      if (data) {
-        const email = data?.user?.email ?? "";
-        const name = data?.user?.name ?? "";
-        const avatar = data?.user?.image ?? "";
+    if (!isLoading) {
+      if (!userData) {
+        if (data) {
+          socialAuth({
+            email: data?.user?.email ?? "",
+            name: data?.user?.name ?? "",
+            avatar: data?.user?.image ?? "",
+          });
 
-        socialAuth({
-          email,
-          name,
-          avatar,
-        });
-      }
+          refetch();
+        }
 
-      if (data === null && isSuccess) {
-        toast.success("Login Successfully!");
-      }
-      if (data === null) {
-        setLogout(true);
+        if (data === null && isSuccess) {
+          toast.success("Login Successfully!");
+        }
+        if (data === null && !isLoading && !userData) {
+          setLogout(true);
+        }
       }
     }
-  }, [data, user]);
+  }, [data, userData, isLoading]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,10 +102,10 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
                   onClick={() => setOpenSidebar(true)}
                 />
               </div>
-              {user ? (
+              {userData ? (
                 <Link href='/profile'>
                   <Image
-                    src={user.avatar ? user.avatar.url : avatar}
+                    src={userData.avatar ? userData.avatar.url : avatar}
                     alt='avatar'
                     width={30}
                     height={30}
@@ -141,7 +142,14 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
         )}
       </div>
       {route === "Login" && open && (
-        <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={Login} />
+        <CustomModel
+          open={open}
+          setOpen={setOpen}
+          setRoute={setRoute}
+          activeItem={activeItem}
+          component={Login}
+          refetch={refetch}
+        />
       )}
       {route === "Sign-Up" && open && (
         <CustomModel open={open} setOpen={setOpen} setRoute={setRoute} activeItem={activeItem} component={SignUp} />

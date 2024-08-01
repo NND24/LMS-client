@@ -180,7 +180,7 @@ const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise, setRoute,
               <div className='w-full'>
                 {stripePromise && clientSecret && (
                   <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckOutForm setOpen={setOpen} data={data} />
+                    <CheckOutForm setOpen={setOpen} data={data} user={user} />
                   </Elements>
                 )}
               </div>
