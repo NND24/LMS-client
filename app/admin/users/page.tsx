@@ -1,5 +1,5 @@
 "use client";
-import AdminSidebar from "@/app/components/Admin/Sidebar/AdminSidebar";
+import AdminSidebar from "../../components/Admin/Sidebar/AdminSidebar";
 import DashboardHero from "@/app/components/Admin/DashboardHero";
 import AdminProtected from "@/app/hooks/adminProtected";
 import Heading from "@/app/utils/Heading";

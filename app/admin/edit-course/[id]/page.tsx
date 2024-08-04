@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import AdminSidebar from "@/app/components/Admin/Sidebar/AdminSidebar";
+import AdminSidebar from "../../components/Admin/Sidebar/AdminSidebar";
 import Heading from "@/app/utils/Heading";
 import EditCourse from "../../../components/Admin/Course/EditCourse";
 import AdminProtected from "@/app/hooks/adminProtected";
