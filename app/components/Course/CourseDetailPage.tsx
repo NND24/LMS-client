@@ -38,9 +38,6 @@ const CourseDetailPage: FC<Props> = ({ id }) => {
     }
   }, [paymentIntentData]);
 
-  console.log(config);
-  console.log(paymentIntentData);
-
   return (
     <>
       {isLoading ? (

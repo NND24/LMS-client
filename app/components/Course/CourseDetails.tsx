@@ -20,18 +20,13 @@ type Props = {
 };
 
 const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise, setRoute, setOpen: openAuthModal }) => {
-  const { user: userData } = useSelector((state: any) => state.auth);
-  const [user, setUser] = useState<any>();
+  const { user } = useSelector((state: any) => state.auth);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setUser(userData?.user);
-  }, [userData]);
 
   const discountPercentage = ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id);
+  const isPurchased = user && user?.courses?.find((item: any) => item.courseId === data._id);
 
   const handleOrder = (e: any) => {
     if (user) {
@@ -97,7 +92,7 @@ const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise, setRoute,
                 </div>
                 <br />
                 {(data?.reviews && [...data.reviews].reverse()).map((item: any, index: number) => (
-                  <div className='w-full pb-4' key={index}>
+                  <div className='w-full pb-4' key={item._id}>
                     <div className='flex'>
                       <div className='w-[50px] h-[50px]'>
                         <Image

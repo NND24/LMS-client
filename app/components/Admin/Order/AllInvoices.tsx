@@ -78,7 +78,7 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
   });
 
   return (
-    <div>
+    <div className='z-[-1]'>
       {isLoading ? (
         <Loader />
       ) : (

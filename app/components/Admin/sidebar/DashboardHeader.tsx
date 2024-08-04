@@ -28,7 +28,7 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
 
   useEffect(() => {
     if (data) {
-      setNotifications(data.notifications.filter((item: any) => item.status === "unread"));
+      setNotifications(data.notification.filter((item: any) => item.status === "unread"));
     }
     if (isSuccess) {
       refetch();
@@ -57,7 +57,7 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
         </span>
       </div>
       {open && (
-        <div className='w-[350px] h-[50vh] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-10 rounded'>
+        <div className='w-[350px] h-[50vh] dark:bg-[#111C43] bg-white shadow-xl absolute top-16 z-999 rounded overflow-auto'>
           <h5 className='text-center text-[20px] font-Poppins text-black dark:text-white p-3'>Notifications</h5>
           {notifications &&
             notifications.map((item: any, index: number) => (

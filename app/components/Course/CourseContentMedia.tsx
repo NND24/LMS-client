@@ -231,7 +231,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
               cols={40}
               rows={5}
               placeholder='Write your question...'
-              className='outline-none bg-transparent ml-3 border border-[#ffffff57] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins'
+              className='outline-none bg-transparent ml-3 border dark:border-[#ffffff57] border-[#00000057] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins'
             ></textarea>
           </div>
           <div className='w-full flex justify-end'>
@@ -246,7 +246,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
           </div>
           <br />
           <br />
-          <div className='w-full h-[1px] bg-[#ffffff3b]'></div>
+          <div className='w-full h-[1px] dark:bg-[#ffffff3b] bg-[#00000057]'></div>
           <div>
             <CommentReply
               data={data}
@@ -310,7 +310,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                     cols={40}
                     rows={5}
                     placeholder='Write your comment...'
-                    className='outline-none bg-transparent ml-3 border border-[#ffffff57] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins'
+                    className='outline-none bg-transparent ml-3 border dark:border-[#ffffff57] border-[#00000057] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins'
                   ></textarea>
                 </div>
               </div>
@@ -327,7 +327,7 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
             </>
           )}
           <br />
-          <div className='w-full h-[1px] bg-[#ffffff3b]'></div>
+          <div className='w-full h-[1px] dark:bg-[#ffffff3b] bg-[#00000057]'></div>
           <div className='w-full'>
             {(course?.reviews && [...course.reviews].reverse())?.map((item: any, index: number) => (
               <div className='w-full my-5 dark:text-white text-black' key={index}>

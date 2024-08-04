@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 import Loader from "./components/Loader/Loader";
 import socketIO from "socket.io-client";
+
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
@@ -27,10 +28,8 @@ const josefin = Josefin_Sans({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en'>
-      <body
-        className={`${poppins.variable} ${josefin.variable} bg-white bg-no-repeat dark:bg-gradient-to-b dark:from-gray-900 dark:to-black transition-colors duration-300`}
-      >
+    <html lang='en' className={`${poppins.variable} ${josefin.variable}`}>
+      <body className='bg-white bg-no-repeat dark:bg-gradient-to-b dark:from-gray-900 dark:to-black transition-colors duration-300'>
         <Providers>
           <SessionProvider>
             <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
