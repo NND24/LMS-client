@@ -146,14 +146,14 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   };
 
   return (
-    <div className='mt-[80px]'>
+    <div>
       {isLoading ? (
         <Loader />
       ) : (
         <Box m='20px'>
           <Box
             m='30px 0 0 0'
-            height='85vh'
+            height='80vh'
             sx={{
               "& .MuiDataGrid-root": {
                 border: "none",
@@ -175,8 +175,8 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
               "& .MuiDataGrid-cell": {
                 borderBottom: "none",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: "center !important",
+                justifyContent: "center !important",
               },
               "& .name-column--cell": {
                 color: theme === "dark" ? "#fff" : "#000",

@@ -27,8 +27,7 @@ const CoursePreview: FC<Props> = ({ active, setActive, courseData, handleCourseC
 
   return (
     <div className='w-[90%] m-auto py-5 mb-5'>
-      <div className='w-full relative'></div>
-      <div className='w-full mt-10'>
+      <div className='w-full'>
         <CoursePlayer videoUrl={courseData?.demoUrl} title={courseData?.title} />
       </div>
 

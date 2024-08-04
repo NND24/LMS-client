@@ -80,7 +80,7 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
       <div
         className={`${
           active
-            ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500"
+            ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#ffffff1c] shadow-xl transition duration-500"
             : "w-full border-b dark:border-[#ffffff1c] h-[80px] z-[80] dark:shadow"
         }`}
       >
@@ -132,11 +132,24 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
           >
             <div className='w-[70%] fixed z-[9999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0'>
               <NavItems activeItem={activeItem} isMobile={true} />
-              <HiOutlineUserCircle
-                size={25}
-                className='cursor-pointer ml-5 my-2 text-black dark:text-white'
-                onClick={() => setOpen(true)}
-              />
+              {userData ? (
+                <Link href='/profile'>
+                  <Image
+                    src={userData.avatar ? userData.avatar.url : avatar}
+                    alt='avatar'
+                    width={30}
+                    height={30}
+                    className='ml-[20px] w-[30px] h-[30px] rounded-full cursor-pointer'
+                    style={{ border: activeItem === 5 ? "2px solid #ffc107" : "none" }}
+                  />
+                </Link>
+              ) : (
+                <HiOutlineUserCircle
+                  size={25}
+                  className='ml-[20px] 800px:block cursor-pointer dark:text-white text-black'
+                  onClick={() => setOpen(true)}
+                />
+              )}
             </div>
           </div>
         )}

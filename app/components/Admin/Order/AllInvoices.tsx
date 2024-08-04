@@ -24,8 +24,8 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
   useEffect(() => {
     if (data && usersData && coursesData) {
       const temp = data.orders.map((item: any) => {
-        const user = usersData.users.find((user: any) => user._id === item.user_id);
-        const course = coursesData.courses.find((course: any) => course._id === item.course_id);
+        const user = usersData.users.find((user: any) => user._id === item.userId);
+        const course = coursesData.courses.find((course: any) => course._id === item.courseId);
         return {
           ...item,
           userName: user?.name,
@@ -78,65 +78,73 @@ const AllInvoices: FC<Props> = ({ isDashboard }) => {
   });
 
   return (
-    <div className={!isDashboard ? "mt-[120px]" : "mt-[0px]"}>
+    <div>
       {isLoading ? (
         <Loader />
       ) : (
-        <Box
-          m={isDashboard ? "0" : "40px 0 0 0"}
-          height={isDashboard ? "32vh" : "79vh"}
-          overflow={"hidden"}
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-              outline: "none",
-            },
-            "& .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon": {
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-sortIcon": {
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-row": {
-              color: theme === "dark" ? "#fff" : "#000",
-              borderBottom: theme === "dark" ? "1px solid #ffffff30 !important" : "1px solid  #ccc !important",
-            },
-            "& .MuiTablePagination-root": {
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none !important",
-            },
-            "& .name-column--cell": {
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: theme === "dark" ? "#3e4396" : "#a4a9fc",
-              borderBottom: "none",
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-container--top [role=row]": {
-              backgroundColor: theme === "dark" ? "#3e4396 !important" : "#a4a9fc !important",
-              borderBottom: "none",
-              color: theme === "dark" ? "#fff" : "#000",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: theme === "dark" ? "#1f2a40 !important" : "#f2f0f0 !important",
-            },
-            "& .MuiDataGrid-footerContainer": {
-              color: theme === "dark" ? "#fff" : "#000",
-              borderTop: "none",
-              backgroundColor: theme === "dark" ? "#3e4396 !important" : "#a4a9fc !important",
-            },
-            "& .MuiCheckbox-root": {
-              color: theme === "dark" ? "#b7ebde !important" : "#000 !important",
-            },
-            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-              color: "#fff !important",
-            },
-          }}
-        >
-          <DataGrid checkboxSelection={!isDashboard} rows={rows} columns={columns} />
+        <Box m={isDashboard ? "0" : "20px"}>
+          <Box
+            m={isDashboard ? "0" : "40px 0 0 0"}
+            height={isDashboard ? "32vh" : "79vh"}
+            overflow={"hidden"}
+            sx={{
+              "& .MuiDataGrid-root": {
+                border: "none",
+                outline: "none",
+              },
+              "& .css-pqjvzzy-MuiSvgIcon-root-MuiSelect-icon": {
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-sortIcon": {
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-row": {
+                color: theme === "dark" ? "#fff" : "#000",
+                borderBottom: theme === "dark" ? "1px solid #ffffff30 !important" : "1px solid #ccc !important",
+              },
+              "& .MuiTablePagination-root": {
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+                display: "flex",
+                alignItems: "center !important",
+                justifyContent: "center !important",
+              },
+              "& .name-column--cell": {
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: theme === "dark" ? "#3e4396" : "#a4a9fc",
+                borderBottom: "none",
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-container--top [role=row]": {
+                backgroundColor: theme === "dark" ? "#3e4396 !important" : "#a4a9fc !important",
+                borderBottom: "none",
+                color: theme === "dark" ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-columnHeaderTitleContainer": {
+                justifyContent: "center",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: theme === "dark" ? "#1F2A40" : "#F2F0F0",
+              },
+              "& .MuiDataGrid-footerContainer": {
+                color: theme === "dark" ? "#fff" : "#000",
+                borderBottom: "none",
+                backgroundColor: theme === "dark" ? "#3e4396" : "#a4a9fc",
+              },
+              "& .MuiCheckbox-root": {
+                color: theme === "dark" ? "#b7ebde !important" : "#000 !important",
+              },
+              "& .MuiDataGrid-toolBarContainer .MuiButton-text": {
+                color: "#fff !important",
+              },
+            }}
+          >
+            <DataGrid checkboxSelection={!isDashboard} rows={rows} columns={columns} />
+          </Box>
         </Box>
       )}
     </div>

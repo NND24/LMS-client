@@ -36,9 +36,9 @@ const FAQ = (props: Props) => {
                     <span className='font-medium text-black dark:text-white'>{q.question}</span>
                     <span className='ml-6 flex-shrink-0'>
                       {activeQuestion === q._id ? (
-                        <HiMinus className='h-6 w-6 text-black dark:text-black' />
+                        <HiMinus className='h-6 w-6 text-black dark:text-white' />
                       ) : (
-                        <HiPlus className='h-6 w-6 text-black dark:text-black' />
+                        <HiPlus className='h-6 w-6 text-black dark:text-white' />
                       )}
                     </span>
                   </button>

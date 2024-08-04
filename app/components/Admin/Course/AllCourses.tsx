@@ -91,7 +91,7 @@ const AllCourses = (props: Props) => {
   };
 
   return (
-    <div className='mt-[80px]'>
+    <div>
       {isLoading ? (
         <Loader />
       ) : (
@@ -120,8 +120,8 @@ const AllCourses = (props: Props) => {
               "& .MuiDataGrid-cell": {
                 borderBottom: "none",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: "center !important",
+                justifyContent: "center !important",
               },
               "& .name-column--cell": {
                 color: theme === "dark" ? "#fff" : "#000",

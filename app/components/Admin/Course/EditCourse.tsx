@@ -165,7 +165,7 @@ const EditCourse: FC<Props> = ({ id }) => {
           />
         )}
       </div>
-      <div className='w-[20%] mt-[100px] h-screen fixed z-[-1] top-18 right-0'>
+      <div className='w-[20%] h-screen fixed z-[-1] top-18 right-0'>
         <CourseOptions active={active} setActive={setActive} />
       </div>
     </div>

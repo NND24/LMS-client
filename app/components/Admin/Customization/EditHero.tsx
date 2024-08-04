@@ -55,29 +55,25 @@ const AllHero = (props: Props) => {
     });
   };
 
-  console.log(data);
-
   return (
     <>
-      <div className='w-full 1000px:flex items-center'>
-        <div className='flex items-center 1500px:h-[700px] 1500px:w-full 1100px:h-[600px] 1100px:w-full h-[50vh] hero-animation rounded'>
-          <div className='1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10 '>
-            <div className='relative'>
-              <Image
-                src={image}
-                alt=''
-                width={400}
-                height={400}
-                className='object-contain 1100px:max-w-[75%] w-[75%] 1500px:max-w-[85%] h-[auto] z-[10]'
-              />
-              <input type='file' name='' id='banner' accept='image/*' onChange={handleUpdate} className='hidden' />
-              <label htmlFor='banner' className='absolute bottom-0 z-20 font-[30px]'>
-                <AiOutlineCamera className='dark:text-white text-black text-[18px] cursor-pointer' />
-              </label>
-            </div>
+      <div className='w-[100%] m-auto'>
+        <div className='w-full 800px:flex items-center mt-[-20px]'>
+          <div className='flex items-center justify-center overflow-hidden mt-[20px] relative'>
+            <Image
+              src={image}
+              alt=''
+              width={700}
+              height={700}
+              className='object-cover max-w-[80%] h-[auto] hero_animation rounded-full'
+            />
+            <input type='file' name='' id='banner' accept='image/*' onChange={handleUpdate} className='hidden' />
+            <label htmlFor='banner' className='absolute bottom-0 right-[40px] z-20'>
+              <AiOutlineCamera className='dark:text-white text-black text-[24px] cursor-pointer' />
+            </label>
           </div>
 
-          <div className='1000px:w-[60%] flex flex-col items-center 1000px:mt-[0px] text-center 1000px:text-left mt-[150px]'>
+          <div className='1000px:w-[60%] flex flex-col items-center 1000px:mt-[0px] text-center 1000px:text-left mt-[20px]'>
             <textarea
               className='resize-none bg-transparent dark:text-white text-[#000000c7] text-[30px] px-3 1000px:text-[50px] font-[600] font-Josefin py-2 1000px:leading-[75px] 1500px:w-[55%] 1100px:w-[78%] w-[90%]'
               placeholder='Improve Your Online Learning Experience Better Instantly'
@@ -93,7 +89,6 @@ const AllHero = (props: Props) => {
               onChange={(e) => setSubTitle(e.target.value)}
               rows={4}
             />
-            <br />
             <br />
             <div
               className={`${styles.button} !w-[100px] !min-h-[40px] !h-[40px] dark:text-white text-black bg-[#cccccc34]

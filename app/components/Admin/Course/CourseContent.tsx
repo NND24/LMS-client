@@ -120,7 +120,7 @@ const CourseContent: FC<Props> = ({
   };
 
   return (
-    <div className='w-[80%] m-auto mt-10 p-3'>
+    <div className='w-[80%] m-auto p-3 mt-[-30px]'>
       <form onSubmit={handleSubmit}>
         {courseContentData?.map((item: any, index: number) => {
           const showSectionInput = index === 0 || item.videoSection !== courseContentData[index - 1].videoSection;

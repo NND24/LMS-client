@@ -2,8 +2,10 @@ import React, { FC, useEffect, useState } from "react";
 import ThemeSwitcher from "../../utils/ThemeSwitcher";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import socketIO from "socket.io-client";
-import { useGetAllCoursesQuery } from "@/redux/features/courses/coursesApi";
-import { useUpdateNotificationStatusMutation } from "@/redux/features/notifications/notificationsApi";
+import {
+  useGetAllNotificationsQuery,
+  useUpdateNotificationStatusMutation,
+} from "@/redux/features/notifications/notificationsApi";
 import { format } from "timeago.js";
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
@@ -14,7 +16,7 @@ type Props = {
 };
 
 const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
-  const { data, refetch } = useGetAllCoursesQuery(undefined, { refetchOnMountOrArgChange: true });
+  const { data, refetch } = useGetAllNotificationsQuery(undefined, { refetchOnMountOrArgChange: true });
   const [updateNotificationStatus, { isSuccess }] = useUpdateNotificationStatusMutation();
 
   const [notifications, setNotifications] = useState<any>([]);
@@ -46,7 +48,7 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
   };
 
   return (
-    <div className='w-full flex items-center justify-end p-6 fixed top-0 right-0'>
+    <div className='w-full flex items-center justify-end p-6 sticky top-0 right-0'>
       <ThemeSwitcher />
       <div className='relative cursor-pointer m-2' onClick={() => setOpen(!open)}>
         <IoMdNotificationsOutline className='text-2xl cursor-pointer dark:text-white text-black' />

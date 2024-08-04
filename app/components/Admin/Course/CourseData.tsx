@@ -46,7 +46,7 @@ const CourseData: FC<Props> = ({ benefits, setBenefits, prerequisites, setPrereq
   };
 
   return (
-    <div className='w-[80%] m-auto mt-20 block'>
+    <div className='w-[80%] m-auto block'>
       <div>
         <label htmlFor='benefit' className={`${styles.label} text-[20px]`}>
           What are the benefits for students in this course?
