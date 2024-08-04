@@ -51,7 +51,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
         toast.error(errorMessage.data.message);
       }
     }
-  }, [deleteSuccess, deleteError, isSuccess]);
+  }, [deleteSuccess, deleteError, isSuccess, refetch]);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },

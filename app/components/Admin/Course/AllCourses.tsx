@@ -35,7 +35,7 @@ const AllCourses = (props: Props) => {
         toast.error(errorMessage.data.message);
       }
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, refetch]);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },

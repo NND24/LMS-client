@@ -57,7 +57,7 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
         }
       }
     }
-  }, [data, userData, isLoading]);
+  }, [data, userData, isLoading, isSuccess, socialAuth, refetch]);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -26,7 +26,7 @@ const Page: FC<Props> = ({ params }) => {
         redirect("/");
       }
     }
-  }, [data, error]);
+  }, [data, error, id]);
 
   return (
     <>

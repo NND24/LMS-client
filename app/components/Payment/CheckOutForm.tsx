@@ -59,7 +59,7 @@ const CheckOutForm: FC<Props> = ({ setOpen, data, user }) => {
         toast.error(errorMessage.data.message);
       }
     }
-  }, [orderData, error]);
+  }, [orderData, error, data.name, data._id, user._id]);
 
   return (
     <form id='payment-form' onSubmit={handleSubmit}>

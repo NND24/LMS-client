@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useEffect, useState } from "react";
 import ThemeSwitcher from "../../utils/ThemeSwitcher";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -34,14 +35,14 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
       refetch();
     }
     audio.load();
-  }, [data, isSuccess]);
+  }, [audio, data, isSuccess, refetch]);
 
   useEffect(() => {
     socketId.on("newNotification", (data) => {
       refetch();
       playerNotificationSound();
     });
-  }, []);
+  }, [playerNotificationSound, refetch]);
 
   const handleNotificationStatusChange = async (id: string) => {
     await updateNotificationStatus(id);

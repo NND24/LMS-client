@@ -148,7 +148,22 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
         toast.error(errorMessage.data.message);
       }
     }
-  }, [isSuccess, error, answerSuccess, answerError, reviewSuccess, reviewError, replySuccess, replyError]);
+  }, [
+    isSuccess,
+    error,
+    answerSuccess,
+    answerError,
+    reviewSuccess,
+    reviewError,
+    replySuccess,
+    replyError,
+    refetch,
+    data,
+    activeVideo,
+    user._id,
+    user.role,
+    courseRefetch,
+  ]);
 
   return (
     <div className='w-[95%] 800px:w-[86%] py-4 m-auto'>

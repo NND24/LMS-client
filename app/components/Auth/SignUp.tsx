@@ -37,7 +37,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
         console.log("An error occurred:", error);
       }
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, data?.message, setRoute]);
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },

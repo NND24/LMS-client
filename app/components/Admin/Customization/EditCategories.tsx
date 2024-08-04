@@ -27,7 +27,7 @@ const EditCategories = (props: Props) => {
         toast.error(errorData?.data?.message);
       }
     }
-  }, [data, layoutSuccess, error]);
+  }, [data, layoutSuccess, error, refetch]);
 
   const handleCategoriesAdd = (id: any, value: string) => {
     setCategories((prevCategory: any) => prevCategory.map((i: any) => (i._id === id ? { ...i, title: value } : i)));

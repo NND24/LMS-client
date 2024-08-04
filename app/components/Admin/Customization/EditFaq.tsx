@@ -28,7 +28,7 @@ const EditFaq = (props: Props) => {
         toast.error(errorData?.data?.message);
       }
     }
-  }, [data, layoutSuccess, error]);
+  }, [data, layoutSuccess, error, refetch]);
 
   const toggleQuestions = (id: any) => {
     setQuestions((prevQuestions) => prevQuestions.map((q) => (q._id === id ? { ...q, active: !q.active } : q)));
