@@ -1,9 +1,9 @@
 "use client";
-import AdminSidebar from "../../components/Admin/Sidebar/AdminSidebar";
+import EditFaq from "@/app/components/Admin/Customization/EditFaq";
 import DashboardHero from "@/app/components/Admin/DashboardHero";
+import AdminSidebar from "@/app/components/Admin/sidebar/AdminSidebar";
 import AdminProtected from "@/app/hooks/adminProtected";
 import Heading from "@/app/utils/Heading";
-import EditFaq from "../../components/Admin/Customization/EditFaq";
 import React from "react";
 
 type Props = {};

@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import AdminSidebar from "../../components/Admin/Sidebar/AdminSidebar";
 import Heading from "@/app/utils/Heading";
-import CreateCourse from "../../components/Admin/Course/CreateCourse";
-import DashboardHeader from "@/app/components/Admin/Sidebar/DashboardHeader";
+import DashboardHeader from "@/app/components/Admin/sidebar/DashboardHeader";
 import AdminProtected from "@/app/hooks/adminProtected";
+import AdminSidebar from "@/app/components/Admin/sidebar/AdminSidebar";
+import CreateCourse from "@/app/components/Admin/Course/CreateCourse";
 
 type Props = {};
 

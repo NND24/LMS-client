@@ -8,7 +8,7 @@ import hero from "../../../../public/assets/hero.png";
 
 type Props = {};
 
-const AllHero = (props: Props) => {
+const EditHero = (props: Props) => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
@@ -117,4 +117,4 @@ const AllHero = (props: Props) => {
   );
 };
 
-export default AllHero;
+export default EditHero;

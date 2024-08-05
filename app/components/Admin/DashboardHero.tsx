@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import DashboardHeader from "./Sidebar/DashboardHeader";
+import DashboardHeader from "./sidebar/DashboardHeader";
 import DashboardWidgets from "../../components/Admin/Widgets/DashboardWidgets";
 
 type Props = {

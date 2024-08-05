@@ -1,9 +1,9 @@
 "use client";
-import AdminSidebar from "../../components/Admin/Sidebar/AdminSidebar";
 import DashboardHero from "@/app/components/Admin/DashboardHero";
+import AllInvoices from "@/app/components/Admin/Order/AllInvoices";
+import AdminSidebar from "@/app/components/Admin/sidebar/AdminSidebar";
 import AdminProtected from "@/app/hooks/adminProtected";
 import Heading from "@/app/utils/Heading";
-import AllInvoices from "../../components/Admin/Order/AllInvoices";
 import React from "react";
 
 type Props = {};
