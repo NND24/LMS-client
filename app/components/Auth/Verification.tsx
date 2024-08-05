@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import toast, { Toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
 import { styles } from "../../styles/style";
 import { useSelector } from "react-redux";
@@ -65,7 +65,7 @@ const Verification: FC<Props> = ({ setRoute }) => {
 
   const handleInputChange = (index: number, value: string) => {
     setInvalidError(false);
-    const newVerifyNumber = { ...verifyNumber, [index]: index };
+    const newVerifyNumber = { ...verifyNumber, [index]: value }; // Correct the value assignment
     setVerifyNumber(newVerifyNumber);
 
     if (value === "" && index > 0) {
