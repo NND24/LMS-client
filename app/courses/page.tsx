@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useGetUsersAllCourseQuery } from "@/redux/features/courses/coursesApi";
 import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
@@ -43,7 +43,7 @@ const Page = (props: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <>
+        <Suspense fallback={<Loader />}>
           <Header route={route} setRoute={setRoute} open={open} setOpen={setOpen} activeItem={1} />
           <div className='w-[95%] 800px:w-[85%] m-auto min-h-[70vh]'>
             <Heading
@@ -86,7 +86,7 @@ const Page = (props: Props) => {
               {courses && courses.map((item: any, index: number) => <CourseCard item={item} key={index} />)}
             </div>
           </div>
-        </>
+        </Suspense>
       )}
     </div>
   );

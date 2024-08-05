@@ -30,9 +30,7 @@ export const apiSlice = createApi({
               user: result.data.user,
             })
           );
-        } catch (error: any) {
-          console.log(error);
-        }
+        } catch (error: any) {}
       },
     }),
   }),
