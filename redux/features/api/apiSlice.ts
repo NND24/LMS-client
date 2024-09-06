@@ -1,11 +1,48 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { userLoggedIn } from "../auth/authSlice";
+import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setCredentials, userLoggedOut } from "../auth/authSlice";
+import { RootState } from "@/redux/store";
+
+interface RefreshResponse {
+  accessToken: string;
+}
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
+const baseQueryWithReAuth = async (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}) => {
+  let result = await baseQuery(args, api, extraOptions);
+
+  if (result?.error?.status === 403) {
+    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+
+    if (refreshResult.data) {
+      const refreshData = refreshResult.data as RefreshResponse;
+      const { accessToken } = refreshData;
+      const user = (api.getState() as RootState).auth.user;
+
+      await localStorage.setItem("user", JSON.stringify({ user, accessToken }));
+      api.dispatch(setCredentials({ user, accessToken }));
+
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(userLoggedOut());
+    }
+  }
+  return result;
+};
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
-  }),
+  baseQuery: baseQueryWithReAuth,
   endpoints: (builder) => ({
     refreshToken: builder.query({
       query: (data) => ({
@@ -25,7 +62,7 @@ export const apiSlice = createApi({
         try {
           const result = await queryFulfilled;
           dispatch(
-            userLoggedIn({
+            setCredentials({
               accessToken: result.data.activationToken,
               user: result.data.user,
             })

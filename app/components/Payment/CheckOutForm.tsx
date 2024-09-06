@@ -1,5 +1,4 @@
 import { styles } from "@/app/styles/style";
-import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 import { useCreateOrderMutation } from "@/redux/features/orders/ordersApi";
 import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { redirect } from "next/navigation";
@@ -20,8 +19,6 @@ const CheckOutForm: FC<Props> = ({ setOpen, data, user }) => {
   const elements = useElements();
   const [message, setMessage] = useState<any>("");
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
-  const [loadUser, setLoadUser] = useState(false);
-  const {} = useLoadUserQuery({ skip: loadUser ? false : true });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
@@ -45,7 +42,6 @@ const CheckOutForm: FC<Props> = ({ setOpen, data, user }) => {
 
   useEffect(() => {
     if (orderData) {
-      setLoadUser(true);
       socketId.emit("notification", {
         title: "New Order",
         message: `You have a new order from ${data.name}`,

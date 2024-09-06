@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
+import { setCredentials, userLoggedOut, userRegistration } from "./authSlice";
 
 type RegistrationResponse = {
   message: string;
@@ -89,8 +89,9 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          await localStorage.setItem("user", JSON.stringify(result.data));
           dispatch(
-            userLoggedIn({
+            setCredentials({
               accessToken: result.data.activationToken,
               user: result.data.user,
             })
@@ -115,8 +116,9 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          await localStorage.setItem("user", JSON.stringify(result.data));
           dispatch(
-            userLoggedIn({
+            setCredentials({
               accessToken: result.data.activationToken,
               user: result.data.user,
             })
@@ -136,6 +138,7 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
+          await localStorage.removeItem("user");
           dispatch(userLoggedOut());
         } catch (error: any) {
           console.log(error);

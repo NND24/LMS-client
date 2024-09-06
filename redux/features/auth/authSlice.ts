@@ -1,8 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+const getUserFromLocalStorage = () => {
+  if (typeof window !== "undefined") {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  }
+  return null;
+};
+
 const initialState = {
-  token: "",
-  user: "",
+  token: getUserFromLocalStorage()?.accessToken || null,
+  user: getUserFromLocalStorage()?.user || null,
 };
 
 const authSlice = createSlice({
@@ -12,17 +20,17 @@ const authSlice = createSlice({
     userRegistration: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token;
     },
-    userLoggedIn: (state, action: PayloadAction<{ accessToken: string; user: string }>) => {
+    setCredentials: (state, action: PayloadAction<{ accessToken: string; user: string }>) => {
       state.token = action.payload.accessToken;
       state.user = action.payload.user;
     },
     userLoggedOut: (state) => {
-      state.token = "";
-      state.user = "";
+      state.token = null;
+      state.user = null;
     },
   },
 });
 
-export const { userRegistration, userLoggedIn, userLoggedOut } = authSlice.actions;
+export const { userRegistration, setCredentials, userLoggedOut } = authSlice.actions;
 
 export default authSlice.reducer;

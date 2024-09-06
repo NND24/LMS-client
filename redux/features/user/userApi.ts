@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { setCredentials } from "../auth/authSlice";
 
 export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,6 +10,20 @@ export const userApi = apiSlice.injectEndpoints({
         body: { avatar },
         credentials: "include" as const,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          await localStorage.setItem("user", JSON.stringify(result.data));
+          dispatch(
+            setCredentials({
+              accessToken: result.data.activationToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
     }),
     editProfile: builder.mutation({
       query: ({ name }) => ({
@@ -17,6 +32,20 @@ export const userApi = apiSlice.injectEndpoints({
         body: { name },
         credentials: "include" as const,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          await localStorage.setItem("user", JSON.stringify(result.data));
+          dispatch(
+            setCredentials({
+              accessToken: result.data.activationToken,
+              user: result.data.user,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
     }),
     updatePassword: builder.mutation({
       query: ({ oldPassword, newPassword }) => ({
