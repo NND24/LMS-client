@@ -20,6 +20,9 @@ const CourseContent = () => {
   const [courses, setCourses] = useState([]);
 
   const { data } = useGetUsersAllCourseQuery(undefined, {});
+  const { data: categoriesData } = useGetHeroDataQuery("Categories", {});
+
+  console.log(categoriesData);
 
   useEffect(() => {
     if (category === "All") {
@@ -44,8 +47,8 @@ const CourseContent = () => {
         >
           All
         </div>
-        {data?.categories &&
-          data.categories.map((item: any, index: number) => (
+        {categoriesData?.layout?.categories &&
+          categoriesData?.layout?.categories.map((item: any, index: number) => (
             <div key={index}>
               <div
                 className={`h-[35px] ${
@@ -64,7 +67,6 @@ const CourseContent = () => {
         </p>
       )}
       <br />
-      <br />
       <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] mb-12 border-0'>
         {courses && courses.map((item: any, index: number) => <CourseCard item={item} key={index} />)}
       </div>
@@ -77,7 +79,6 @@ const Page = (props: Props) => {
   const [open, setOpen] = useState(false);
 
   const { isLoading } = useGetUsersAllCourseQuery(undefined, {});
-  const { data: categoriesData } = useGetHeroDataQuery("Categories", {});
 
   return (
     <div>
