@@ -41,8 +41,8 @@ const ChangePassword: FC<Props> = (props) => {
       </h1>
       <div className='w-full'>
         <form aria-required onSubmit={passwordChangeHandler} className='flex flex-col items-center'>
-          <div className='w-[100%] 800px:w-[60px] mt-5'>
-            <label className='block pb-2'>Enter your old password</label>
+          <div className='w-[100%] 800px:w-[600px] mt-5'>
+            <label className='block text-black dark:text-[#fff]'>Enter your old password</label>
             <input
               type='password'
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
@@ -51,8 +51,8 @@ const ChangePassword: FC<Props> = (props) => {
               onChange={(e) => setOldPassword(e.target.value)}
             />
           </div>
-          <div className='w-[100%] 800px:w-[60px] mt-2'>
-            <label className='block pb-2'>Enter your new password</label>
+          <div className='w-[100%] 800px:w-[600px] mt-3'>
+            <label className='block text-black dark:text-[#fff]'>Enter your new password</label>
             <input
               type='password'
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
@@ -61,8 +61,8 @@ const ChangePassword: FC<Props> = (props) => {
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
-          <div className='w-[100%] 800px:w-[60px] mt-2'>
-            <label className='block pb-2'>Enter your old password</label>
+          <div className='w-[100%] 800px:w-[600px] mt-3'>
+            <label className='block text-black dark:text-[#fff]'>Enter your old password</label>
             <input
               type='password'
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0 text-black dark:text-[#fff]`}
@@ -74,7 +74,7 @@ const ChangePassword: FC<Props> = (props) => {
               type='submit'
               required
               value='update'
-              className={`w-[95%] h-[40px] border-[#37a39a] text-center text-black dark:text-[#fff] rounded-[3px] mt-8 cursor-pointer`}
+              className='w-[40%] 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer'
             />
           </div>
         </form>

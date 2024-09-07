@@ -59,9 +59,9 @@ const Profile: FC<Props> = ({ user }) => {
   }, [data, user.courses]);
 
   return (
-    <div className='w-[85%] flex mx-auto'>
+    <div className='w-[85%] flex mx-auto mb-7'>
       <div
-        className={`w-[6px] 800px:w-[310px] h-[450px] dark:bg-slate-900 bg-opacity-900 border bg-white dark:border-[#ffffffff1d] border-[#00000016] rounded-[5px] shadow-sm mt-[80px] sticky ${
+        className={`w-[50px] 800px:w-[310px] h-[450px] dark:bg-slate-900 bg-opacity-900 border bg-white dark:border-[#ffffffff1d] border-[#00000016] rounded-[5px] shadow-sm mt-[60px] sticky ${
           scroll ? "top-[120px]" : "top-[30px]"
         }`}
       >
@@ -74,17 +74,17 @@ const Profile: FC<Props> = ({ user }) => {
         />
       </div>
       {active === 1 && (
-        <div className='w-full h-full bg-transparent mt-[80px]'>
+        <div className='w-full h-full bg-transparent mt-[60px]'>
           <ProfileInfo avatar={avatar} user={user} />
         </div>
       )}
       {active === 2 && (
-        <div className='w-full h-full bg-transparent mt-[80px]'>
+        <div className='w-full h-full bg-transparent mt-[60px]'>
           <ChangePassword />
         </div>
       )}
       {active === 3 && (
-        <div className='w-full pl-7 px-2 800px:px-10 800px:pl-8'>
+        <div className='w-full pl-7 px-2 800px:px-10 800px:pl-8 mt-[60px]'>
           <div className='grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-2 lg:gap-[25px] xl:grid-cols-3 xl:gap-[35px]'>
             {courses &&
               courses.map((item: any, index: number) => <CourseCard item={item} key={index} isProfile={true} />)}
