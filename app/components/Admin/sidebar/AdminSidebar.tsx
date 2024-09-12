@@ -22,6 +22,7 @@ import {
   VideoCall,
   Web,
   Wysiwyg,
+  Logout,
 } from "@mui/icons-material";
 import { RootState } from "@/redux/store";
 
@@ -108,6 +109,7 @@ const AdminSidebar = () => {
                     border: "3px solid #5b6fe6",
                     objectFit: "cover",
                   }}
+                  className='!w-[100px] !h-[100px]'
                 />
               </Box>
               <Box textAlign='center'>
@@ -244,6 +246,8 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Item title='Go back home' to='/' icon={<Logout />} selected={selected} setSelected={setSelected} />
           </Box>
         </Menu>
       </Sidebar>

@@ -16,7 +16,6 @@ const baseQuery = fetchBaseQuery({
       const parsedUser = storedUser ? JSON.parse(storedUser) : null;
       token = parsedUser?.accessToken || null;
     }
-    console.log(token);
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
