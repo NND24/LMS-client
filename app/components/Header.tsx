@@ -80,8 +80,8 @@ const Header: FC<Props> = ({ open, setOpen, activeItem, route, setRoute }) => {
             : "w-full border-b dark:border-[#ffffff1c] h-[80px] z-[80] dark:shadow"
         }`}
       >
-        <div className='w-[95%] 800px:w-[92%] m-auto py-2 h-full'>
-          <div className='w-full h-[80px] flex items-center justify-between p-3'>
+        <div className='w-[95%] 800px:w-[92%] m-auto h-full'>
+          <div className='w-full h-[80px] flex items-center justify-between'>
             <div>
               <Link href={"/"} className={`text-[25px] font-Poppins font-[500] text-black dark:text-white`}>
                 ELearning

@@ -20,8 +20,8 @@ const Profile: FC<Props> = ({ user }) => {
 
   const { data, isLoading } = useGetUsersAllCourseQuery(undefined, {});
 
-  useLogOutQuery(undefined, {
-    skip: !logout ? true : false,
+  const { refetch, isSuccess } = useLogOutQuery(undefined, {
+    skip: !logout,
   });
 
   useEffect(() => {
@@ -47,6 +47,7 @@ const Profile: FC<Props> = ({ user }) => {
   const logoutHandler = async () => {
     setLogout(true);
     await signOut();
+    refetch();
   };
 
   useEffect(() => {

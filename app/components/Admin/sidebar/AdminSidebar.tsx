@@ -23,6 +23,7 @@ import {
   Web,
   Wysiwyg,
 } from "@mui/icons-material";
+import { RootState } from "@/redux/store";
 
 interface itemProps {
   title: string;
@@ -43,8 +44,7 @@ const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const AdminSidebar = () => {
-  const { user } = useSelector((state: any) => state.auth);
-  const [logout, setLogout] = useState(false);
+  const { user } = useSelector((state: RootState) => state.auth);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [mounted, setMounted] = useState(false);
@@ -55,8 +55,6 @@ const AdminSidebar = () => {
   if (!mounted) {
     return null;
   }
-
-  const logoutHandler = () => {};
 
   return (
     <Box
@@ -101,13 +99,14 @@ const AdminSidebar = () => {
               <Box display='flex' justifyContent='center' alignItems='center'>
                 <Image
                   alt='profile-user'
+                  src={user.avatar ? user.avatar.url : defaultAvatar}
                   width={100}
                   height={100}
-                  src={user.avatar ? user.avatar.url : defaultAvatar}
                   style={{
                     cursor: "pointer",
                     borderRadius: "50%",
                     border: "3px solid #5b6fe6",
+                    objectFit: "cover",
                   }}
                 />
               </Box>

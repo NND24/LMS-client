@@ -30,7 +30,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className='bg-white bg-no-repeat dark:bg-gradient-to-b dark:from-gray-900 dark:to-black transition-colors duration-300'>
         <Providers>
           <SessionProvider>
-            <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
               <ContentLoader>{children}</ContentLoader>
               <Toaster position='top-center' reverseOrder={false} />
             </ThemeProvider>
@@ -43,6 +43,16 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
 const ContentLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (!storedTheme) {
+      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add("dark");
+    } else if (storedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
     socketId.on("connection", () => {});
   }, []);
 

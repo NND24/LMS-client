@@ -74,7 +74,7 @@ const ChangePassword: FC<Props> = (props) => {
               type='submit'
               required
               value='update'
-              className='w-[40%] 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer'
+              className='w-[40%] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer'
             />
           </div>
         </form>

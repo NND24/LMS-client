@@ -9,6 +9,7 @@ import { useDeleteUserMutation, useGetAllUsersQuery, useUpdateUserRoleMutation }
 import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 type Props = {
   isTeam: boolean;
@@ -16,7 +17,7 @@ type Props = {
 
 const AllUsers: FC<Props> = ({ isTeam }) => {
   const { theme, setTheme } = useTheme();
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const [active, setActive] = useState(false);
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");

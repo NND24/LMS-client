@@ -109,13 +109,13 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           />
           {!show ? (
             <AiOutlineEyeInvisible
-              className='absolute bottom-3 right-2 z-1 cursor-pointer'
+              className='absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white'
               size={20}
               onClick={() => setShow(true)}
             />
           ) : (
             <AiOutlineEye
-              className='absolute bottom-3 right-2 z-1 cursor-pointer'
+              className='absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white'
               size={20}
               onClick={() => setShow(false)}
             />
@@ -131,7 +131,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           <FcGoogle size={30} className='cursor-pointer mr-2' />
           <AiFillGithub size={30} className='cursor-pointer mr-2' />
         </div>
-        <h5 className='text-center pt-4 font-Poppins text-[14px]'>
+        <h5 className='text-center pt-4 font-Poppins text-[14px] text-black dark:text-white'>
           Already have any account?
           <span className='text-[#2190ff] pl-1 cursor-pointer' onClick={() => setRoute("Login")}>
             Login

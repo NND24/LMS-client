@@ -10,7 +10,13 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    let token = (getState() as RootState).auth.token;
+    if (!token) {
+      const storedUser = localStorage.getItem("user");
+      const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+      token = parsedUser?.accessToken || null;
+    }
+    console.log(token);
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }

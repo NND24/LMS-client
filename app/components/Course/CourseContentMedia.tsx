@@ -360,21 +360,23 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                       className='w-[50px] h-[50px] object-cover rounded-full'
                     />
                   </div>
-                  <div className='ml-2'>
-                    <h1 className='text-[18px]'>{item?.user.name}</h1>
+                  <div className='pl-3 dark:text-white text-black'>
+                    <h1 className='text-[20px]'>{item?.user.name}</h1>
                     <Ratings rating={item.rating} />
                     <p>{item.comment}</p>
-                    <small className='text-[#0000009e] dark:text-[#ffffff83]'>{format(item.createdAt)} •</small>
+                    <small className='text-[#000000b8] dark:text-[#ffffff83]'>
+                      {!item.createdAt ? "" : format(item?.createdAt)} •
+                    </small>
                   </div>
                 </div>
                 {user.role === "admin" && (
                   <span
-                    className={`${styles.label} pl-5 cursor-pointer`}
+                    className={`800px:pl-16 text-[#000000b8] dark:text-[#ffffff83] cursor-pointer mr-2`}
                     onClick={() => {
-                      setIsReviewReply(true), setReviewId(item._id);
+                      setIsReviewReply(!isReviewReply), setReviewId(item._id);
                     }}
                   >
-                    Add Reply
+                    {!isReviewReply ? (item.commentReplies.length !== 0 ? "All Replies" : "Add Reply") : "Hide Replies"}
                   </span>
                 )}
 
@@ -392,34 +394,37 @@ const CourseContentMedia: FC<Props> = ({ data, id, activeVideo, setActiveVideo, 
                     </button>
                   </div>
                 )}
-
-                {item.commentReplies.map((i: any, id: number) => (
-                  <div className='w-full flex 800px:ml-16 my-5' key={id}>
-                    <div className='w-[50px] h-[50px]'>
-                      <Image
-                        src={
-                          i.user.avatar
-                            ? i.user.avatar.url
-                            : "https://res.cloudinary.com/datnguyen240/image/upload/v1722168751/avatars/avatar_pnncdk.png"
-                        }
-                        alt=''
-                        width={50}
-                        height={50}
-                        className='w-[50px] h-[50px] object-cover rounded-full'
-                      />
-                    </div>
-                    <div className='pl-2'>
-                      <div className='flex items-center'>
-                        <h5 className='text-[20px]'>{item.user.name}</h5>
-                        {item.user.role === "admin" && (
-                          <VscVerifiedFilled className='text-[#0095F6] ml-2 text-[20px]' />
-                        )}
+                {isReviewReply && (
+                  <>
+                    {item.commentReplies.map((i: any, id: number) => (
+                      <div className='w-full flex 800px:ml-12 my-5 text-black dark:text-white' key={id}>
+                        <div className='w-[50px] h-[50px]'>
+                          <Image
+                            src={
+                              i.user.avatar
+                                ? i.user.avatar.url
+                                : "https://res.cloudinary.com/datnguyen240/image/upload/v1722168751/avatars/avatar_pnncdk.png"
+                            }
+                            alt=''
+                            width={50}
+                            height={50}
+                            className='w-[50px] h-[50px] object-cover rounded-full'
+                          />
+                        </div>
+                        <div className='pl-3'>
+                          <div className='flex items-center'>
+                            <h5 className='text-[20px]'>{item.user.name}</h5>
+                            {item.user.role === "admin" && (
+                              <VscVerifiedFilled className='text-[#0095F6] ml-2 text-[20px]' />
+                            )}
+                          </div>
+                          <p>{i.comment}</p>
+                          <small className='text-[#0000009e] dark:text-[#ffffff83]'>{format(i.createdAt)} •</small>
+                        </div>
                       </div>
-                      <p>{i.comment}</p>
-                      <small className='text-[#0000009e] dark:text-[#ffffff83]'>{format(i.createdAt)} •</small>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -519,7 +524,7 @@ const CommentItem = ({ setQuestionId, item, answer, setAnswer, handleAnswerSubmi
                     className='w-[50px] h-[50px] object-cover rounded-full'
                   />
                 </div>
-                <div className='pl-3 '>
+                <div className='pl-3'>
                   <div className='flex items-center'>
                     <h5 className='text-[20px]'>{item.user.name}</h5>
                     {item.user.role === "admin" && <VscVerifiedFilled className='text-[#0095F6] ml-2 text-[20px]' />}

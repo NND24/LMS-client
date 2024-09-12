@@ -10,6 +10,7 @@ import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../Payment/CheckOutForm";
 import Image from "next/image";
+import { RootState } from "@/redux/store";
 
 type Props = {
   data: any;
@@ -20,7 +21,7 @@ type Props = {
 };
 
 const CourseDetails: FC<Props> = ({ data, clientSecret, stripePromise, setRoute, setOpen: openAuthModal }) => {
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const [open, setOpen] = useState(false);
 
   const discountPercentage = ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;

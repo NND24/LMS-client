@@ -26,8 +26,8 @@ const FAQ = (props: Props) => {
         <h1 className={`${styles.title} 800px:text-[40px]`}>Frequently Asked Questions</h1>
         <div className='mt-12'>
           <dl className='space-y-8'>
-            {questions.map((q) => (
-              <div className={`${q._id !== questions[0]?._id && "border-t"} border-gray-200 pt-2`} key={q.id}>
+            {questions.map((q, index) => (
+              <div className={`${q._id !== questions[0]?._id && "border-t"} border-gray-200 pt-2`} key={index}>
                 <dt className='text-lg'>
                   <button
                     className='flex items-start justify-between w-full text-left focus:outline-none'

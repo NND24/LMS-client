@@ -29,11 +29,9 @@ const Page: FC<Props> = ({ params }) => {
   }, [id, user]);
 
   return (
-    <>
-      <div>
-        <CourseContent id={id} user={user} />
-      </div>
-    </>
+    <div>
+      <CourseContent id={id} user={user} />
+    </div>
   );
 };
 
